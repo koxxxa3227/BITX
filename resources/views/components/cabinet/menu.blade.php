@@ -33,5 +33,5 @@
 </div>
 <div class="col-md-2 text-right">
     <p class="login"><i class="fa fa-user" aria-hidden="true"></i> Ваш логин: <strong>{{$me->login}}</strong></p>
-    <p class="my-ref mt-1"><i class="fas fa-handshake" aria-hidden="true"></i> Ваш рефер: <strong>{{$me->ref_login}}</strong></p>
+    <p class="my-ref mt-1"><i class="fas fa-handshake" aria-hidden="true"></i> Ваш рефер: <strong>{{isset($me->ref_login) ? $me->ref_login : ""}}</strong></p>
 </div>

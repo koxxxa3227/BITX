@@ -17,7 +17,7 @@ class PageController extends Controller
     public function payments(){
         $view = view("profile.payments");
         $view->me = $me = \Auth::user();
-        $refs = User::whereRefLogin($me->lower_login);
+        $view->myPayments = $me->myPayments;
         return $view;
     }
 

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Payment;
 use App\Models\Wallet;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
@@ -35,5 +36,9 @@ class User extends Authenticatable
 
     public function myWallets(){
         return $this->hasOne(Wallet::class, 'user_id');
+    }
+
+    public function myPayments(){
+        return $this->hasMany(Payment::class, 'user_id');
     }
 }

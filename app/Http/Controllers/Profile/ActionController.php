@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Models\Payment;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,6 +52,21 @@ class ActionController extends Controller
         $wallet->save();
 
         \Session::flash('status', 'Сохранено успешно');
+        return back();
+    }
+
+    public function paymentsRequest(Request $request){
+        $me = \Auth::user();
+        $payments = new Payment();
+
+        $payments->user_id = $me->id;
+        $payments->payment_system = isset($request->payment_system) ? $request->payment_system : $request->payment_system_mobile;
+        $payments->amount = $request->withdraw_amount;
+
+        $payments->save();
+
+        \Session::flash('status', 'Запрос принят.');
+
         return back();
     }
 }

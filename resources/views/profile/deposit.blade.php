@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("content")
-    <div class="container">
+    <div class="container my-2">
         <div class="row">
             @include('components.cabinet.menu', ['value' => '1'])
         </div>

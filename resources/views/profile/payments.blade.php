@@ -1,25 +1,25 @@
 @extends("layouts.app")
 
 @section("content")
-    <div class="container">
+    <div class="container my-2">
         <div class="row">
             @include('components.cabinet.menu', ['value'=> '2'])
         </div>
         <div class="row">
-            <form action="" class="deposit_form">
-                {{csrf_field()}}
+            <form action="{{action('Profile\ActionController@paymentsRequest')}}" class="deposit_form" method="post">
+                @csrf
                 <div class="col-md-5 text-center">
                     <div class="form-group">
                         <p>Что бы вывести средства, укажите сумму <br> и выберите электронный кошелёк</p>
                     </div>
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-md-6">
                             <label for="withdraw_amount">Укажите сумму вывода (<i class="fa fa-usd"></i>)</label>
-                            <input type="number" min="1" class="form-control" name="withdraw_amount" id="withdraw_amount">
+                            <input type="number" min="0" value="" class="form-control" name="withdraw_amount" id="withdraw_amount">
                         </div>
                         <div class="col-md-6">
                             <label for="left_amount">Остаток средств после вывода (<i class="fa fa-usd"></i>)</label>
-                            <input type="text" class="form-control" name="left_amount" id="left_amount" value="0.00" readonly>
+                            <input type="text" class="form-control" name="left_amount" id="left_amount" value="{{$me->money}}" readonly>
                         </div>
                     </div>
                 </div>
@@ -70,6 +70,7 @@
                         <option value="btc">BTC</option>
                         <option value="eth">ETH</option>
                     </select>
+                    <button class="btn btn-primary btn-block mt-2">Вывести</button>
                 </div>
             </form>
         </div>
@@ -87,12 +88,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>25.12.2017</td>
-                            <td>1500</td>
-                            <td>Payeer</td>
-                            <td>Success</td>
-                        </tr>
+                        @foreach($myPayments as $myPayment)
+                            <tr>
+                                <td>{{$myPayment->created_at->format("d.M.Y H:i")}}</td>
+                                <td>{{$myPayment->amount}}</td>
+                                <td>{{$myPayment->payment_system}}</td>
+                                <td>{{$myPayment->status}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -100,3 +103,12 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $('#withdraw_amount').on('input', function(){
+            var left = '{{$me->money}}' - $(this).val();
+           $('#left_amount').val(left <= 0 ? '0.00' : left);
+        });
+    </script>
+@endpush
