@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Deposit;
 use App\Models\Payment;
 use App\User;
 use Illuminate\Http\Request;
@@ -34,6 +35,12 @@ class PageController extends Controller
         $view = view("admin.payments");
         $view->me = \Auth::user();
         $view->payments = Payment::query()->paginate(20);
+        return $view;
+    }
+
+    public function deposits(){
+        $view = view("admin.deposits");
+        $view->deposits = Deposit::query()->paginate(20);
         return $view;
     }
 }

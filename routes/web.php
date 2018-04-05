@@ -31,9 +31,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
     Route::get('/users', "Admin\PageController@users");
     Route::get('/user/id={id}', "Admin\PageController@editUser");
     Route::get('/payments', 'Admin\PageController@payments');
+    Route::get('/deposits', 'Admin\PageController@deposits');
     Route::group(['prefix' => 'post'], function(){
         Route::post('/user/id={id}/save', 'Admin\ActionController@editUserSaver');
         Route::post('/payment/update-status/id={id}', "Admin\ActionController@updatePaymentStatus");
+        Route::post('/deposit/update-status/id={id}', "Admin\ActionController@updateDepositStatus");
     });
 });
 

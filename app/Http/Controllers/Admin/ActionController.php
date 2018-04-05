@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Deposit;
 use App\Models\Payment;
 use App\User;
 use Illuminate\Http\Request;
@@ -34,6 +35,20 @@ class ActionController extends Controller
 
         if($request->status == "Оплачено"){
             $payment->user->increment('money', $payment->amount);
+        }
+
+        \Session::flash('status', 'Сохранено');
+        return back();
+    }
+
+    public function updateDepositStatus(Request $request, $id){
+        $deposit = Deposit::findOrFail($id);
+
+        $deposit->status = $request->status;
+        $deposit->save();
+
+        if($request->status == "Завершен"){
+            $deposit->user->increment('money', $deposit->income_with_percent);
         }
 
         \Session::flash('status', 'Сохранено');
