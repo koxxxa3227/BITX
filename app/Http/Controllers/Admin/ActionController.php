@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Payment;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,5 +23,20 @@ class ActionController extends Controller
 
         \Session::flash('status', 'Сохранено');
         return redirect()->action('Admin\PageController@users');
+    }
+
+
+    public function updatePaymentStatus(Request $request, $id){
+        $payment = Payment::findOrFail($id);
+
+        $payment->status = $request->status;
+        $payment->save();
+
+        if($request->status == "Оплачено"){
+            $payment->user->increment('money', $payment->amount);
+        }
+
+        \Session::flash('status', 'Сохранено');
+        return back();
     }
 }

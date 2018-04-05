@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="col-md-7 text-center d-block d-md-none">
-                    <h4>Выберите систему пополнения:</h4>
+                    <h4>Выберите систему вывода:</h4>
                     <div class="col-md-2">
                         <div class="img-block">
                             <img src="/img/logo-payeer.png" alt="" class="img-responsive thumbnail m-auto">

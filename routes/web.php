@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/home', function () {
-    return redirect('/');
-});
+Route::get('/home', function () { return redirect('/'); });
 
 Auth::routes();
 
@@ -32,13 +30,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
     Route::get('/', 'Admin\PageController@index');
     Route::get('/users', "Admin\PageController@users");
     Route::get('/user/id={id}', "Admin\PageController@editUser");
+    Route::get('/payments', 'Admin\PageController@payments');
     Route::group(['prefix' => 'post'], function(){
         Route::post('/user/id={id}/save', 'Admin\ActionController@editUserSaver');
+        Route::post('/payment/update-status/id={id}', "Admin\ActionController@updatePaymentStatus");
     });
 });
 
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
-    Route::get('/', function(){return redirect()->action('Profile\PageController@deposit');});
+    Route::get('/', function(){ return redirect()->action('Profile\PageController@deposit'); });
     Route::get('/deposit', 'Profile\PageController@deposit');
     Route::get('/payments', 'Profile\PageController@payments');
     Route::get('/cabinet', 'Profile\PageController@cabinet');

@@ -8,21 +8,28 @@
 </div>
 <div class="col-sm-8 col-md-6">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
+            <div class="rounded text-center border menu-info-item m-auto">
+                <small class="text-secondary">Баланс:</small>
+                <p class="mt-2"><strong>{{$me->money}} <i class="fa fa-usd"></i></strong></p>
+                <p class="mt-1"><a href="#">Пополнить</a></p>
+            </div>
+        </div>
+        <div class="col-sm-3">
             <div class="rounded text-center border menu-info-item m-auto">
                 <small class="text-secondary">Доход от инвестиций:</small>
                 <p><strong>0.00 <i class="fa fa-usd"></i></strong></p>
                 <p class="check-circle"><i class="fa fa-check"></i></p>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="rounded text-center border menu-info-item m-auto">
                 <small class="text-secondary">Общий реферальный доход:</small>
                 <p><strong>0.00 <i class="fa fa-usd"></i></strong></p>
                 <p class="check-circle"><i class="fa fa-check"></i></p>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="rounded text-center border menu-info-item m-auto">
                 <small class="text-secondary">Всего <br> выплачено:</small>
                 <p><strong>0.00 <i class="fa fa-usd"></i></strong></p>

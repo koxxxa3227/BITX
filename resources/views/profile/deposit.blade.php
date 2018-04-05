@@ -14,14 +14,13 @@
                     <div class="form-group">
                         <label for="invest_plan">Выберите инвестиционный план:</label> <br>
                         <select name="invest_plan" id="invest_plan" class="text-uppercase" required>
-                            <option value="">-Выберите План-</option>
                             @foreach($plans as$plan)
-                                <option value="{{$plan->id}}">{{$plan->title}}</option>
+                                <option value="{{$plan->id}}" {{$plan->id == 1 ? "selected" : ""}}>{{$plan->title}}</option>
                             @endforeach
                         </select>
                     </div>
                     @foreach($plans as $plan)
-                        <div class="row plan_item d-none plan_id_{{$plan->id}}">
+                        <div class="row plan_item {{$plan->id == 1 ? "" : "d-none"}} plan_id_{{$plan->id}}">
                             <div class="col-md-6">
                                 <label for="payment_amount_{{$plan->id}}">Введите сумму пополнения (<i
                                             class="fa fa-usd"></i>)</label>
@@ -38,7 +37,9 @@
                                        value="{{(($plan->percent*$plan->days_multiply)*$plan->min_amount)}}"
                                        name="income_amount" id="income_amount_{{$plan->id}}"
                                        readonly>
-                                Оплата раз в 14 дней
+                                @if($plan->id == 4)
+                                    Оплата раз в 14 дней
+                                @endif
                             </div>
                         </div>
                     @endforeach

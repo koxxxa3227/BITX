@@ -1,9 +1,9 @@
-$(document).ready(function(e) {
-    $('a').bind('click', function(event) {
+$(document).ready(function (e) {
+    $('a').bind('click', function (event) {
         var $anchor = $(this);
-
+        var href = $anchor.attr('href');
         $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top - 91
+            scrollTop: $(href).offset().top - 91
         }, 1500, 'easeInOutExpo');
         /*
         if you don't want to use the easing effects:
@@ -15,7 +15,7 @@ $(document).ready(function(e) {
     });
 
     $('#header_outer').scrollToFixed();
-    $('.res-nav_click').click(function() {
+    $('.res-nav_click').click(function () {
         $('.main-nav').slideToggle();
         return false
 
@@ -29,7 +29,7 @@ wow = new WOW({
     offset: 100
 });
 wow.init();
-document.getElementById('').onclick = function() {
+document.getElementById('').onclick = function () {
     var section = document.createElement('section');
     section.className = 'wow fadeInDown';
     section.className = 'wow shake';
