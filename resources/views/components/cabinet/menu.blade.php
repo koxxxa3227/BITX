@@ -6,7 +6,7 @@
         <li role="presentation" class="{{$value == 4 ? "active" : ""}}"><a href="{{action('Profile\PageController@refs')}}">Рефералы</a></li>
     </ul>
 </div>
-<div class="col-md-7">
+<div class="col-sm-8 col-md-6">
     <div class="row">
         <div class="col-sm-4">
             <div class="rounded text-center border menu-info-item m-auto">
@@ -24,14 +24,14 @@
         </div>
         <div class="col-sm-4">
             <div class="rounded text-center border menu-info-item m-auto">
-                <small class="text-secondary">Всего выплачено:</small>
+                <small class="text-secondary">Всего <br> выплачено:</small>
                 <p><strong>0.00 <i class="fa fa-usd"></i></strong></p>
                 <p class="check-circle"><i class="fa fa-check"></i></p>
             </div>
         </div>
     </div>
 </div>
-<div class="col-md-2 text-right">
+<div class=" col-sm-4 col-md-3 text-right">
     <p class="login"><i class="fa fa-user" aria-hidden="true"></i> Ваш логин: <strong>{{$me->login}}</strong></p>
-    <p class="my-ref mt-1"><i class="fas fa-handshake" aria-hidden="true"></i> Ваш рефер: <strong>{{isset($me->ref_login) ? $me->ref_login : ""}}</strong></p>
+    <p class="my-ref mt-1"><i class="fas fa-handshake" aria-hidden="true"></i> Ваш рефер: <strong>{{!empty($me->ref_login) ? $me->ref_login : "Не задан"}}</strong></p>
 </div>

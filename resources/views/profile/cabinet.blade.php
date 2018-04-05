@@ -51,7 +51,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <h4 class="text-center">Кошельки</h4>
                 <form action="{{action('Profile\ActionController@personalWalletsSaver')}}" class="wallets_data_form"
                       method="post">

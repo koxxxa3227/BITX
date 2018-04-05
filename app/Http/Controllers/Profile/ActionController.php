@@ -57,15 +57,21 @@ class ActionController extends Controller
 
     public function paymentsRequest(Request $request){
         $me = \Auth::user();
-        $payments = new Payment();
 
-        $payments->user_id = $me->id;
-        $payments->payment_system = isset($request->payment_system) ? $request->payment_system : $request->payment_system_mobile;
-        $payments->amount = $request->withdraw_amount;
+        if($me->money >= $$request->withdraw_amount) {
 
-        $payments->save();
+            $payments = new Payment();
 
-        \Session::flash('status', 'Запрос принят.');
+            $payments->user_id = $me->id;
+            $payments->payment_system = isset($request->payment_system) ? $request->payment_system : $request->payment_system_mobile;
+            $payments->amount = $request->withdraw_amount;
+
+            $payments->save();
+
+            \Session::flash('status', 'Запрос принят.');
+        } else {
+            \Session::flash('status', 'Недостаточно денег');
+        }
 
         return back();
     }
