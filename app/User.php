@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function myDeposits(){
         return $this->hasMany(Deposit::class, 'user_id');
     }
+
+    public function refs(){
+        return $this->belongsTo(User::class, 'ref_login', 'login');
+    }
 }

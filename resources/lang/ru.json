@@ -3,5 +3,7 @@
     "pm" : "Perfect Money",
     "adv" : "ADVCash",
     "btc" : "Bitcoin",
-    "eth" : "Ethereum"
+    "eth" : "Ethereum",
+    "user" : "Пользователь",
+    "admin" : "Администратор"
 }

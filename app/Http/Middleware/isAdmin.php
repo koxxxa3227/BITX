@@ -20,6 +20,6 @@ class isAdmin
         }
 
         \Session::flash('status', __("Отказано в доступе"));
-        return back();
+        return redirect()->action('HomeController@index');
     }
 }

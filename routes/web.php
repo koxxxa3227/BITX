@@ -30,15 +30,21 @@ Route::view('404', '404');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function(){
     Route::get('/', 'Admin\PageController@index');
+    Route::get('/users', "Admin\PageController@users");
+    Route::get('/user/id={id}', "Admin\PageController@editUser");
+    Route::group(['prefix' => 'post'], function(){
+        Route::post('/user/id={id}/save', 'Admin\ActionController@editUserSaver');
+    });
 });
 
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
+    Route::get('/', function(){return redirect()->action('Profile\PageController@deposit');});
     Route::get('/deposit', 'Profile\PageController@deposit');
     Route::get('/payments', 'Profile\PageController@payments');
     Route::get('/cabinet', 'Profile\PageController@cabinet');
     Route::get('/refs', 'Profile\PageController@refs');
 
-    Route::group(['prefix' => 'settings'], function(){
+    Route::group(['prefix' => 'post'], function(){
         Route::post('/personal-data-saver', 'Profile\ActionController@personalDataSaver');
         Route::post('/personal-wallets-saver', 'Profile\ActionController@personalWalletsSaver');
         Route::post('/payments-request', 'Profile\ActionController@paymentsRequest');
