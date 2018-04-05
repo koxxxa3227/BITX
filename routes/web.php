@@ -17,6 +17,8 @@ Route::get('/home', function () {
 
 Auth::routes();
 
+Route::get('/logout', 'Auth\LoginController@logout');
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/feedback', 'HomeController@feedback');
 
@@ -35,4 +37,9 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
     Route::get('/payments', 'Profile\PageController@payments');
     Route::get('/cabinet', 'Profile\PageController@cabinet');
     Route::get('/refs', 'Profile\PageController@refs');
+
+    Route::group(['prefix' => 'settings'], function(){
+        Route::post('/personal-data-saver', 'Profile\ActionController@personalDataSaver');
+        Route::post('/personal-wallets-saver', 'Profile\ActionController@personalWalletsSaver');
+    });
 });

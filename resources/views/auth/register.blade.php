@@ -74,7 +74,7 @@
                                             Укажите пригласителя<span class="descr_star">*</span>
                                         </label>
                                         <input type="text" name="ref" placeholder="Логин пригласителя" class="inputs"
-                                               size="30" required="">
+                                               size="30" required="" readonly>
 
 
                                         @if ($errors->has('ref'))
@@ -121,6 +121,12 @@
     </div>
 @endsection
 
-{{--@push('script')--}}
-    {{--<script src="/contactform/contactform.js"></script>--}}
-{{--@endpush--}}
+@push('script')
+    <script>
+        $(function(){
+           var href = location.href;
+           href = href.replace('http://{{$_SERVER['HTTP_HOST']}}/register?ref=', '');
+           $('[name="ref"]').val(href);
+        });
+    </script>
+@endpush

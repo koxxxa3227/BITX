@@ -76,7 +76,7 @@
         <div class="row my-2">
             <div class="col-md-6 col-md-offset-3">
                 <div class="table-responsive">
-                    <h4 class="text-center">История пополнений:</h4>
+                    <h4 class="text-center">История выплат:</h4>
                     <table class="table text-center">
                         <thead>
                         <tr>

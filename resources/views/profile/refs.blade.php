@@ -22,14 +22,14 @@
                     <div class="col-sm-6">
                         <div class="rounded text-center border menu-info-item m-auto">
                             <small class="text-secondary">Всего <br> регистраций:</small>
-                            <p><strong>0.00 <i class="fa fa-usd"></i></strong></p>
+                            <p class="fz-20 counter-style"><strong>{{$myRefsCount}}</strong></p>
                             <p class="check-circle"><i class="fa fa-check"></i></p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="rounded text-center border menu-info-item m-auto">
                             <small class="text-secondary">Всего <br> активных:</small>
-                            <p><strong>0.00 <i class="fa fa-usd"></i></strong></p>
+                            <p class="fz-20 counter-style"><strong>0</strong></p>
                             <p class="check-circle"><i class="fa fa-check"></i></p>
                         </div>
                     </div>
@@ -42,11 +42,21 @@
                         <thead>
                         <tr>
                             <th>Логин</th>
-                            <th>Дата</th>
-                            <th>Пополнение (<i class="fa fa-usd"></i>)</th>
-                            <th>Реферальные (<i class="fa fa-usd"></i>)</th>
+                            <th class="text-center">Дата</th>
+                            <th class="text-center">Пополнение (<i class="fa fa-usd"></i>)</th>
+                            <th class="text-center">Реферальные (<i class="fa fa-usd"></i>)</th>
                         </tr>
                         </thead>
+                        <tbody>
+                        @foreach($myRefs as $key=>$myRef)
+                            <tr class="text-center">
+                                <td class="text-left">{{$myRef->login}}</td>
+                                <td>{{$myRef->created_at}}</td>
+                                <td>0.00 $</td>
+                                <td>0.00 $</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

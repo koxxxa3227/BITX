@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Wallet;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,5 +31,9 @@ class User extends Authenticatable
 
     function getCreatedAtAttribute($value){
         return Carbon::parse($value)->format('d.M.Y H:i');
+    }
+
+    public function myWallets(){
+        return $this->hasOne(Wallet::class, 'user_id');
     }
 }

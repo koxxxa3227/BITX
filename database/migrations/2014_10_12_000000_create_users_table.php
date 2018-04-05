@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('login')->unique();
             $table->string('lower_login');
-            $table->string('ref_login');
+            $table->string('ref_login')->nullable();
             $table->string('skype')->nullable()->unique();
             $table->string('telegram')->nullable()->unique();
             $table->string('role')->default('user');

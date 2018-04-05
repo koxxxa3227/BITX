@@ -16,12 +16,12 @@ class CreateWalletsTable extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("user_id");
-            $table->string("payeer_wallet");
-            $table->string("pm_wallet");
-            $table->string("eth_wallet");
-            $table->string("btc_wallet");
-            $table->string("adv_wallet");
-            $table->string("ltc_wallet");
+            $table->string("payeer")->unique();
+            $table->string("pm")->unique();
+            $table->string("eth")->unique();
+            $table->string("btc")->unique();
+            $table->string("adv")->unique();
+            $table->string("ltc")->unique();
             $table->timestamps();
         });
     }

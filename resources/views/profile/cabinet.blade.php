@@ -8,7 +8,9 @@
         <div class="row">
             <div class="col-sm-6">
                 <h4 class="text-center">Персональные данные</h4>
-                <form action="" class="personal_data_form">
+                <form action="{{action('Profile\ActionController@personalDataSaver')}}" class="personal_data_form"
+                      method="post">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -38,9 +40,9 @@
                                        min="6" value="">
                             </div>
                             <div class="form-group">
-                                <label for="confirm_password">Подтвердить пароль</label>
-                                <input type="password" class="form-control" name="confirm_password"
-                                       id="confirm_password" min="6" value="">
+                                <label for="password_confirm">Подтвердить пароль</label>
+                                <input type="password" class="form-control" name="password_confirmation"
+                                       id="password_confirm" min="6" value="">
                             </div>
                         </div>
                     </div>
@@ -51,39 +53,47 @@
             </div>
             <div class="col-md-6">
                 <h4 class="text-center">Кошельки</h4>
-                <form action="" class="wallets_data_form">
+                <form action="{{action('Profile\ActionController@personalWalletsSaver')}}" class="wallets_data_form"
+                      method="post">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="payeer_wallet">Payeer</label>
-                                <input type="text" value="" class="form-control" name="payeer_wallet"
+                                <input type="text" value="{{isset($myWallets->payeer) ? $myWallets->payeer : ""}}"
+                                       class="form-control" name="payeer_wallet"
                                        id="payeer_wallet">
                             </div>
                             <div class="form-group">
                                 <label for="pm_wallet">Perfect money</label>
-                                <input type="text" value="" class="form-control" name="pm_wallet"
+                                <input type="text" value="{{isset($myWallets->pm) ? $myWallets->pm : ""}}"
+                                       class="form-control" name="pm_wallet"
                                        id="pm_wallet">
                             </div>
                             <div class="form-group">
                                 <label for="ltc_wallet">LTC</label>
-                                <input type="text" value="" class="form-control" name="ltc_wallet"
+                                <input type="text" value="{{isset($myWallets->ltc) ? $myWallets->ltc : ""}}"
+                                       class="form-control" name="ltc_wallet"
                                        id="ltc_wallet">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="eth_wallet">ETH</label>
-                                <input type="text" value="" class="form-control" name="eth_wallet"
+                                <input type="text" value="{{isset($myWallets->eth) ? $myWallets->eth : ""}}"
+                                       class="form-control" name="eth_wallet"
                                        id="eth_wallet">
                             </div>
                             <div class="form-group">
                                 <label for="btc_wallet">BTC</label>
-                                <input type="text" value="" class="form-control" name="btc_wallet"
+                                <input type="text" value="{{isset($myWallets->btc) ? $myWallets->btc : ""}}"
+                                       class="form-control" name="btc_wallet"
                                        id="btc_wallet">
                             </div>
                             <div class="form-group">
                                 <label for="adv_wallet">Advcash</label>
-                                <input type="text" value="" class="form-control" name="adv_wallet"
+                                <input type="text" value="{{isset($myWallets->adv) ? $myWallets->adv : ""}}"
+                                       class="form-control" name="adv_wallet"
                                        id="adv_wallet">
                             </div>
                         </div>
