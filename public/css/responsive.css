@@ -186,7 +186,10 @@
 	#content_wrapper #content,
 	#content_wrapper #content .content-box-wrapper,
 	#content_wrapper #content .content-box-wrapper input,
-	#forms .form_group_wrapper {
+	#forms .form_group_wrapper,
+	#login_frm input[type='text'],
+	#login_frm input[type='email'],
+	#login_frm input[type='password']{
 		width : 100%;
 		height: auto;
 	}

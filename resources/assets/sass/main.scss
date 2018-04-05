@@ -278,6 +278,10 @@ select.custom-select{
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
+.d-inline-block{
+  display : inline-block;
+}
+
 @media (max-width : 991px) {
   .d-md-block {
     display : block;
