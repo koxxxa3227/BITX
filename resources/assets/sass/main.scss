@@ -137,6 +137,14 @@
 
 /*Margin Styles / End*/
 
+.text-uppercase{
+  text-transform : uppercase;
+}
+
+.text-capitalize{
+  text-transform : capitalize;
+}
+
 #cabinet-menu {
   width : 100%;
   li.presentation {

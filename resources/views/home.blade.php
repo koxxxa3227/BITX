@@ -86,152 +86,154 @@
             <div id="pricingDIV_2">
 
                 <div id="pricingDIV_8">
-                    <div id="pricingDIV_9">
-                        <div id="pricingDIV_10">
-                            <div id="pricingDIV_11">
-                                <p id="pricingP_12">
-                                    STARTING
-                                </p>
-                            </div>
-                            <div id="pricingDIV_13">
-                                <h4 id="pricingH4_14">
-                                    <sup id="pricingSUP_15">%</sup>1.5
-                                </h4>
-                            </div>
-                            <div id="pricingDIV_17">
-                                <ul id="pricingUL_18">
-                                    <li id="pricingLI_19">
-                                        Минимальная сумма: $ 500
-                                    </li>
-                                    <li id="pricingLI_20">
-                                        Максимальная сумма: $ 999
-                                    </li>
-                                    <li id="pricingLI_21">
-                                        Срок инвестиции: 7 дней
-                                    </li>
-                                    <li id="pricingLI_22">
-                                        Дни начислений: пн — пт
-                                    </li>
-                                    <li id="pricingLI_23">
-                                        Выплаты: Понедельник
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="pricingDIV_24">
-                                <a href="/register" id="pricingA_25">Инвестировать</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="pricingDIV_26">
-                        <div id="pricingDIV_27">
-                            <div id="pricingDIV_28">
-                                <p id="pricingP_29">
-                                    BUSINESS
-                                </p>
-                            </div>
-                            <div id="pricingDIV_30">
-                                <h4 id="pricingH4_31">
-                                    <sup id="pricingSUP_32">%</sup>2.1
-                                </h4>
-                            </div>
-                            <div id="pricingDIV_34">
-                                <ul id="pricingUL_35">
-                                    <li id="pricingLI_36">
-                                        Минимальная сумма: $ 1000
-                                    </li>
-                                    <li id="pricingLI_37">
-                                        Максимальная сумма: $ 2999
-                                    </li>
-                                    <li id="pricingLI_38">
-                                        Срок инвестиции: 10 дней
-                                    </li>
-                                    <li id="pricingLI_39">
-                                        Дни начислений: пн — пт
-                                    </li>
-                                    <li id="pricingLI_40">
-                                        Выплаты: Понедельник
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="pricingDIV_41">
-                                <a href="/register" id="pricingA_42">Инвестировать</a>
+                    @foreach($plans as $plan)
+                        <div id="pricingDIV_9">
+                            <div id="pricingDIV_10">
+                                <div id="pricingDIV_11">
+                                    <p id="pricingP_12" style="text-transform: uppercase">
+                                        {{$plan->title}}
+                                    </p>
+                                </div>
+                                <div id="pricingDIV_13">
+                                    <h4 id="pricingH4_14">
+                                        <sup id="pricingSUP_15">%</sup>{{$plan->percent}}
+                                    </h4>
+                                </div>
+                                <div id="pricingDIV_17">
+                                    <ul id="pricingUL_18">
+                                        <li id="pricingLI_19">
+                                            Минимальная сумма: $ {{$plan->min_amount}}
+                                        </li>
+                                        <li id="pricingLI_20">
+                                            Максимальная сумма: $ {{$plan->max_amount}}
+                                        </li>
+                                        <li id="pricingLI_21">
+                                            Срок инвестиции: {{$plan->invest_time}}
+                                        </li>
+                                        <li id="pricingLI_22">
+                                            Дни начислений: {{$plan->accrual_date}}
+                                        </li>
+                                        <li id="pricingLI_23">
+                                            Выплаты: {{$plan->payments_date}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="pricingDIV_24">
+                                    <a href="/register" id="pricingA_25">Инвестировать</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="pricingDIV_43">
-                        <div id="pricingDIV_44">
-                            <div id="pricingDIV_45">
-                                <p id="pricingP_46">
-                                    BUSINESS PLUS
-                                </p>
-                            </div>
-                            <div id="pricingDIV_47">
-                                <h4 id="pricingH4_48">
-                                    <sup id="pricingSUP_49">%</sup>2.8
-                                </h4>
-                            </div>
-                            <div id="pricingDIV_51">
-                                <ul id="pricingUL_52">
-                                    <li id="pricingLI_53">
-                                        Минимальная сумма: $ 3000
-                                    </li>
-                                    <li id="pricingLI_54">
-                                        Максимальная сумма: $ 4999
-                                    </li>
-                                    <li id="pricingLI_55">
-                                        Срок инвестиции: 15 дней
-                                    </li>
-                                    <li id="pricingLI_56">
-                                        Дни начислений: пн — пт
-                                    </li>
-                                    <li id="pricingLI_57">
-                                        Выплаты: Понедельник
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="pricingDIV_58">
-                                <a href="/register" id="pricingA_59">Инвестировать</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="pricingDIV_60">
-                        <div id="pricingDIV_61">
-                            <div id="pricingDIV_62">
-                                <p id="pricingP_63">
-                                    BUSINESS PRO
-                                </p>
-                            </div>
-                            <div id="pricingDIV_64">
-                                <h4 id="pricingH4_65">
-                                    <sup id="pricingSUP_66">%</sup>3.7
-                                </h4>
-                            </div>
-                            <div id="pricingDIV_68">
-                                <ul id="pricingUL_69">
-                                    <li id="pricingLI_70">
-                                        Минимальная сумма: $ 5000
-                                    </li>
-                                    <li id="pricingLI_71">
-                                        Максимальная сумма: $ 9999
-                                    </li>
-                                    <li id="pricingLI_72">
-                                        Срок инвестиции: БЕССРОЧНЫЙ
-                                    </li>
-                                    <li id="pricingLI_73">
-                                        Дни начислений: пн — пт
-                                    </li>
-                                    <li id="pricingLI_74">
-                                        Выплаты: Раз в 14 дней
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="pricingDIV_75">
-                                <a href="/register" id="pricingA_76">Инвестировать</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                    {{--<div id="pricingDIV_26">--}}
+                    {{--<div id="pricingDIV_27">--}}
+                    {{--<div id="pricingDIV_28">--}}
+                    {{--<p id="pricingP_29">--}}
+                    {{--BUSINESS--}}
+                    {{--</p>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_30">--}}
+                    {{--<h4 id="pricingH4_31">--}}
+                    {{--<sup id="pricingSUP_32">%</sup>2.1--}}
+                    {{--</h4>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_34">--}}
+                    {{--<ul id="pricingUL_35">--}}
+                    {{--<li id="pricingLI_36">--}}
+                    {{--Минимальная сумма: $ 1000--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_37">--}}
+                    {{--Максимальная сумма: $ 2999--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_38">--}}
+                    {{--Срок инвестиции: 10 дней--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_39">--}}
+                    {{--Дни начислений: пн — пт--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_40">--}}
+                    {{--Выплаты: Понедельник--}}
+                    {{--</li>--}}
+                    {{--</ul>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_41">--}}
+                    {{--<a href="/register" id="pricingA_42">Инвестировать</a>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_43">--}}
+                    {{--<div id="pricingDIV_44">--}}
+                    {{--<div id="pricingDIV_45">--}}
+                    {{--<p id="pricingP_46">--}}
+                    {{--BUSINESS PLUS--}}
+                    {{--</p>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_47">--}}
+                    {{--<h4 id="pricingH4_48">--}}
+                    {{--<sup id="pricingSUP_49">%</sup>2.8--}}
+                    {{--</h4>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_51">--}}
+                    {{--<ul id="pricingUL_52">--}}
+                    {{--<li id="pricingLI_53">--}}
+                    {{--Минимальная сумма: $ 3000--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_54">--}}
+                    {{--Максимальная сумма: $ 4999--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_55">--}}
+                    {{--Срок инвестиции: 15 дней--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_56">--}}
+                    {{--Дни начислений: пн — пт--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_57">--}}
+                    {{--Выплаты: Понедельник--}}
+                    {{--</li>--}}
+                    {{--</ul>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_58">--}}
+                    {{--<a href="/register" id="pricingA_59">Инвестировать</a>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_60">--}}
+                    {{--<div id="pricingDIV_61">--}}
+                    {{--<div id="pricingDIV_62">--}}
+                    {{--<p id="pricingP_63">--}}
+                    {{--BUSINESS PRO--}}
+                    {{--</p>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_64">--}}
+                    {{--<h4 id="pricingH4_65">--}}
+                    {{--<sup id="pricingSUP_66">%</sup>3.7--}}
+                    {{--</h4>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_68">--}}
+                    {{--<ul id="pricingUL_69">--}}
+                    {{--<li id="pricingLI_70">--}}
+                    {{--Минимальная сумма: $ 5000--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_71">--}}
+                    {{--Максимальная сумма: $ 9999--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_72">--}}
+                    {{--Срок инвестиции: БЕССРОЧНЫЙ--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_73">--}}
+                    {{--Дни начислений: пн — пт--}}
+                    {{--</li>--}}
+                    {{--<li id="pricingLI_74">--}}
+                    {{--Выплаты: Раз в 14 дней--}}
+                    {{--</li>--}}
+                    {{--</ul>--}}
+                    {{--</div>--}}
+                    {{--<div id="pricingDIV_75">--}}
+                    {{--<a href="/register" id="pricingA_76">Инвестировать</a>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
                 </div>
-            </div>
         </section>
     </div>
     <!--main-section-end-->

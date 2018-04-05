@@ -42,5 +42,6 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
         Route::post('/personal-data-saver', 'Profile\ActionController@personalDataSaver');
         Route::post('/personal-wallets-saver', 'Profile\ActionController@personalWalletsSaver');
         Route::post('/payments-request', 'Profile\ActionController@paymentsRequest');
+        Route::post('/deposit-request', 'Profile\ActionController@depositsRequest');
     });
 });

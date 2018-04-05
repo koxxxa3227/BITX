@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Deposit;
 use App\Models\Payment;
 use App\Models\Wallet;
 use Carbon\Carbon;
@@ -40,5 +41,9 @@ class User extends Authenticatable
 
     public function myPayments(){
         return $this->hasMany(Payment::class, 'user_id');
+    }
+
+    public function myDeposits(){
+        return $this->hasMany(Deposit::class, 'user_id');
     }
 }

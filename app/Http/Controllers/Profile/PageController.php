@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plan;
 use App\User;
 
 class PageController extends Controller
@@ -10,7 +11,8 @@ class PageController extends Controller
     public function deposit(){
         $view = view("profile.deposit");
         $view->me = $me = \Auth::user();
-        $refs = User::whereRefLogin($me->lower_login);
+        $view->plans = Plan::all();
+        $view->myDeposits = $me->myDeposits()->orderBy('id', 'desc')->get();
         return $view;
     }
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Models\Deposit;
 use App\Models\Payment;
+use App\Models\Plan;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -69,6 +71,30 @@ class ActionController extends Controller
             $payments->save();
 
             \Session::flash('status', 'Запрос принят.');
+        } else {
+            \Session::flash('status', 'Недостаточно денег');
+        }
+
+        return back();
+    }
+
+    public function depositsRequest(Request $request){
+        $me = \Auth::user();
+        if($me->money >= $request->enter_amount) {
+            $deposit = new Deposit();
+            $plan = Plan::findOrFail($request->hidden_plan_id);
+
+            $deposit->user_id = $me->id;
+            $deposit->plan_id = $request->hidden_plan_id;
+            $deposit->payment_amount = $request->enter_amount;
+            $deposit->income_with_percent = $request->enter_amount * $plan->percent;
+            $deposit->payment_system = $request->payment_system;
+
+            $deposit->save();
+
+            $me->increment('money', -$request->enter_amount);
+
+            \Session::flash('status', 'Депозит создан');
         } else {
             \Session::flash('status', 'Недостаточно денег');
         }
