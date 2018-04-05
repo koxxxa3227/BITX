@@ -3,7 +3,7 @@
         <li role="presentation" class="{{$value == 1 ? "active" : ""}}"><a href="{{action('Profile\PageController@deposit')}}">Депозит</a></li>
         <li role="presentation" class="{{$value == 2 ? "active" : ""}}"><a href="{{action('Profile\PageController@payments')}}">Выплаты</a></li>
         <li role="presentation" class="{{$value == 3 ? "active" : ""}}"><a href="{{action('Profile\PageController@cabinet')}}">Кабинет</a></li>
-        <li role="presentation" class="{{$value == 4 ? "active" : ""}}"><a href="#">Рефералы</a></li>
+        <li role="presentation" class="{{$value == 4 ? "active" : ""}}"><a href="{{action('Profile\PageController@refs')}}">Рефералы</a></li>
     </ul>
 </div>
 <div class="col-md-7">

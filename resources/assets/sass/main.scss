@@ -9,6 +9,10 @@
   margin-top : 1rem;
 }
 
+.mt-3{
+  margin-top : 3rem;
+}
+
 .my-2{
   margin-top: 2rem;
   margin-bottom : 2rem;
@@ -101,6 +105,25 @@
 
 .d-none{
   display : none;
+}
+
+#refs-page{
+  input.input-styled{
+    outline: none;
+    border: none;
+    background : #f4f4f4;
+    border-radius: 6px;
+    color : #000000;
+    width : 100%;
+    padding: 6px 15px;
+  }
+
+  table{
+    tr th,
+    tr td{
+      font-size : 12px;
+    }
+  }
 }
 
 @media (max-width : 991px) {

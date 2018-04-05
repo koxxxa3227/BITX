@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('login')->unique();
+            $table->string('lower_login');
             $table->string('ref_login');
             $table->string('skype')->nullable()->unique();
             $table->string('telegram')->nullable()->unique();

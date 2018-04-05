@@ -23,4 +23,10 @@ class PageController extends Controller
         $view->me = \Auth::user();
         return $view;
     }
+
+    public function refs(){
+        $view = view("profile.refs");
+        $view->me = \Auth::user();
+        return $view;
+    }
 }

@@ -34,4 +34,5 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
     Route::get('/deposit', 'Profile\PageController@deposit');
     Route::get('/payments', 'Profile\PageController@payments');
     Route::get('/cabinet', 'Profile\PageController@cabinet');
+    Route::get('/refs', 'Profile\PageController@refs');
 });
