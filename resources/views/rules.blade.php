@@ -1,5 +1,14 @@
 @extends("layouts.app")
 
+@push('style')
+    <style>
+        #rulesDIV_2,
+        #rulesDIV_3{
+            height : 100%;
+        }
+    </style>
+@endpush
+
 @section("content")
     <section id="rulesSECTION_1">
         <div id="rulesDIV_2">
@@ -146,8 +155,12 @@
                     администрации сервиса в обмане или жульничестве, нарушении прав Клиента, будут восприняты как
                     заведомо ложный донос.
                 </p>
+                <div class="text-center my-2">
+                    <a href="{{@route('register')}}" class="btn btn-primary">Перейти к регистрации</a>
+                </div>
             </div>
             <div class="clearfix"></div>
+
         </div>
         <br id="rulesBR_45"/>
     </section>

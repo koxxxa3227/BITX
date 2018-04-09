@@ -12,14 +12,16 @@ class PageController extends Controller
         $view = view("profile.deposit");
         $view->me = $me = \Auth::user();
         $view->plans = Plan::all();
-        $view->myDeposits = $me->myDeposits()->orderBy('id', 'desc')->get();
+        $view->myDeposits = $me->myDeposits()->orderBy('id', 'desc')->paginate(10);
         return $view;
     }
 
-    public function payments(){
+    public function payments($popup = ''){
         $view = view("profile.payments");
         $view->me = $me = \Auth::user();
-        $view->myPayments = $me->myPayments;
+        $view->myPayments = $me->myPayments()->whereType('Пополнение')->orderBy('id', 'desc')->paginate(10);
+        $view->myWithdraws = $me->myPayments()->whereType('Вывод')->orderBy('id', 'desc')->paginate(10);
+        $view->popup = $popup;
         return $view;
     }
 

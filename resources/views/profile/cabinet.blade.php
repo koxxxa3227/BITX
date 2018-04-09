@@ -14,8 +14,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" id="email" value="{{$me->email}}">
+                                <label for="settings_email">Email</label>
+                                <input type="email" class="form-control" name="email" id="settings_email" value="{{$me->email}}">
                             </div>
                             <div class="form-group">
                                 <label for="login">Логин</label>

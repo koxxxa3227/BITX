@@ -22,7 +22,12 @@
         }
 
         tr.success td {
-            background : rgba(76, 147, 76, .3) !important;
+            background : rgba(0, 147, 8, 0.3) !important;
+            color      : #474747 !important;
+        }
+
+        tr.canceled td{
+            background : rgba(255, 0, 0, .3) !important;
             color      : #474747 !important;
         }
     </style>
@@ -46,7 +51,7 @@
                 </thead>
                 <tbody>
                 @foreach($deposits as $deposit)
-                    <tr class="{{$deposit->status == "Завершен" ? "success" : ""}}">
+                    <tr class="{{$deposit->status == "Обработан" ? "success" : ""}} {{$deposit->status == "Отменен" ? "canceled" : ""}}">
                         <td>{{$deposit->user->login}}</td>
                         <td class="text-uppercase">{{$deposit->plan->title}}</td>
                         <td>{{$deposit->payment_amount}} <i class="fa fa-usd"></i></td>
@@ -58,18 +63,15 @@
                                   method="post">
                                 @csrf
                                 <select name="status" id="status" class="custom-select"
-                                        onchange="this.form.submit();" {{$deposit->status == "Завершен" ? "disabled" : ""}}>
+                                        onchange="this.form.submit();" {{$deposit->status != "В обработке" ? "disabled" : ""}}>
                                     <option value="В обработке" {{$deposit->status == "В обработке" ? "selected" : ""}}>
                                         В обработке
                                     </option>
-                                    <option value="Ожидается оплата" {{$deposit->status == "Ожидается оплата" ? "selected" : ""}}>
-                                        Ожидается оплата
+                                    <option value="Обработан" {{$deposit->status == "Обработан" ? "selected" : ""}}>
+                                        Обработан
                                     </option>
-                                    <option value="Завершен" {{$deposit->status == "Завершен" ? "selected" : ""}}>
-                                        Завершен
-                                    </option>
-                                    <option value="Не завершен" {{$deposit->status == "Не завершен" ? "selected" : ""}}>
-                                        Не завершен
+                                    <option value="Отменен" {{$deposit->status == "Отменен" ? "selected" : ""}}>
+                                        Отменен
                                     </option>
                                 </select>
                             </form>

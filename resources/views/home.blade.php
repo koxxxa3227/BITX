@@ -40,8 +40,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="service_block">
-                            <div class="service_icon delay-03s animated wow  zoomIn"><span><i
-                                            class="fa-check-circle-o"></i></span>
+                            <div class="service_icon icon1 delay-03s animated wow  zoomIn"><span></span>
                             </div>
                             <h3 class="animated fadeInUp wow">СТАНОВИТЕСЬ ЧЛЕНОМ НАШЕГО КЛУБА</h3>
                             <p class="animated fadeInDown wow">Присоединяйтесь к нашему клубу</p>
@@ -49,8 +48,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="service_block">
-                            <div class="service_icon icon2  delay-03s animated wow zoomIn"><span><i
-                                            class="fa-credit-card"></i></span></div>
+                            <div class="service_icon icon2  delay-03s animated wow zoomIn"><span></span></div>
                             <h3 class="animated fadeInUp wow">ПРИНИМАЙТЕ АКТИВНОЕ УЧАСТИЕ</h3>
                             <p class="animated fadeInDown wow">Каждое пополнение делает Ваше участие в клубе более
                                 весомым.</p>
@@ -58,8 +56,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="service_block">
-                            <div class="service_icon icon3  delay-03s animated wow zoomIn"><span><i
-                                            class="fa-smile-o"></i></span>
+                            <div class="service_icon icon3  delay-03s animated wow zoomIn"><span></span>
                             </div>
                             <h3 class="animated fadeInUp wow">ПОЛУЧАЙТЕ РЕЗУЛЬТАТ</h3>
                             <p class="animated fadeInDown wow">Выводите стабильную прибыль от пассивного

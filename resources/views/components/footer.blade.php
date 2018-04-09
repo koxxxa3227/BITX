@@ -12,14 +12,16 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="contact_block">
-                            <div class="contact_block_icon icon2 rollIn animated wow"><span><i
-                                            class="fa-skype"></i></span></div>
+                            <div class="contact_block_icon icon2 rollIn animated wow"><span><a
+                                            href="skype:live:bitxsupport?call"> <i
+                                                class="fa-skype"></i></a></span></div>
                             <span><a href="skype:live:bitxsupport?call"> SKYPE</a></span></div>
                     </div>
                     <div class="col-lg-4">
                         <div class="contact_block">
-                            <div class="contact_block_icon icon3 rollIn animated wow"><span><i
-                                            class="fa-send"></i></span></div>
+                            <div class="contact_block_icon icon3 rollIn animated wow"><span><a
+                                            href="https://t.me/bitx_space"><i
+                                                class="fa-send"></i></a></span></div>
                             <span> <a href="https://t.me/bitx_space">TELEGRAM</a> </span></div>
                     </div>
                 </div>
@@ -48,7 +50,8 @@
                     <div class="form">
                         <div id="sendmessage">Ваше сообщение было отправлено. Спасибо!</div>
                         <div id="errormessage">Произошла ошибка. Повторите попытку.</div>
-                        <form action="{{action("HomeController@feedback")}}" method="post" role="form" class="contactForm">
+                        <form action="{{action("HomeController@feedback")}}" method="post" role="form"
+                              class="contactForm">
                             {{csrf_field()}}
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control input-text" id="name"

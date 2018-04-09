@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReplenishmentsTable extends Migration
+class CreateWalletInstructionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateReplenishmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('replenishments', function (Blueprint $table) {
+        Schema::create('wallet_instructions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer("user_id");
-            $table->text("amount");
-            $table->text("payment_system");
-            $table->timestamps();
+            $table->string("wallet");
+            $table->text("content");
+            $table->string('link')->nullable();
         });
     }
 
@@ -29,6 +28,6 @@ class CreateReplenishmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('replenishments');
+        Schema::dropIfExists('wallet_instructions');
     }
 }

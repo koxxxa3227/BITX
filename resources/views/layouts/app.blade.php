@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1">
-    <title>PROJECT</title>
-    <link rel="icon" href="/img/fav.png" type="image/png">
+    <title>BTIX Space</title>
+    <link rel="icon" href="/img/favicon.ico" type="image/icon">
     <link href="/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <link href="/css/linecons.css" rel="stylesheet" type="text/css">
@@ -18,6 +18,7 @@
           rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Dosis:400,500,700,800,600,300,200' rel='stylesheet'
           type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/main.min.css">
 
@@ -36,6 +37,7 @@
     <script type="text/javascript" src="/js/jquery.isotope.js"></script>
     <script type="text/javascript" src="/js/wow.js"></script>
     <script type="text/javascript" src="/js/classie.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function (e) {
@@ -66,6 +68,18 @@
             $(".divclass").css("font-size", newFontSizeTitle)
         }
     </script>
+
+    <style>
+        @media (max-width : 991px) {
+            .text-sm-center{
+                text-align : center;
+            }
+
+            .mt-sm-2{
+                margin-top : 2rem;
+            }
+        }
+    </style>
 
     @stack('style')
 </head>

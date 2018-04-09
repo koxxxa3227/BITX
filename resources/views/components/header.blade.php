@@ -1,7 +1,7 @@
 <header id="header_outer">
     <div class="container">
         <div class="header_section">
-            <div class="logo"><a href="/"><img src="/img/logo.png" alt=""></a></div>
+            <div class="logo"><a href="/"><img src="/img/bitx_logo.png" width="131" alt=""></a></div>
             <nav class="nav" id="nav">
                 <ul class="toggle">
                     <li><a href="{{!Request::is('/') ? "/" : ""}}#service">Преимущества</a></li>

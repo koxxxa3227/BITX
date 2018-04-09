@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Deposit;
 use App\Models\Payment;
+use App\Models\WalletInstruction;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,7 +34,12 @@ class ActionController extends Controller
         $payment->status = $request->status;
         $payment->save();
 
-        if($request->status == "Оплачено"){
+        if($request->status == "Обработан"){
+            $ref = $payment->user->ref_login;
+            if($ref){
+                $reffer = User::whereLogin($ref)->first();
+                $reffer->increment('money', $payment->amount * .11);
+            }
             $payment->user->increment('money', $payment->amount);
         }
 
@@ -47,11 +53,24 @@ class ActionController extends Controller
         $deposit->status = $request->status;
         $deposit->save();
 
+
+
         if($request->status == "Завершен"){
             $deposit->user->increment('money', $deposit->income_with_percent);
         }
 
         \Session::flash('status', 'Сохранено');
+        return back();
+    }
+
+    public function walletInstructionSaver(Request $request){
+        WalletInstruction::whereWallet('payeer')->update(['content' => $request->payeer]);
+        WalletInstruction::whereWallet('pm')->update(['content' => $request->pm]);
+        WalletInstruction::whereWallet('adv')->update(['content' => $request->adv]);
+        WalletInstruction::whereWallet('btc')->update(['content' => $request->btc]);
+        WalletInstruction::whereWallet('eth')->update(['content' => $request->eth]);
+
+        \Session::flash("status", 'Сохранено');
         return back();
     }
 }

@@ -190,7 +190,7 @@
     font-size : 12px;
   }
 }
-
+.replenishment_frm,
 .wallets_data_form,
 .personal_data_form,
 .deposit_form {
@@ -296,12 +296,16 @@ select.custom-select{
       width : 100%;
     }
   }
+
+  .text-sm-center{
+    text-align: center;
+  }
 }
 
 .btn-styled {
   background    : #4862a3;
   color         : #ffffff;
-  border-radius : 50%;
+  border-radius : 50px;
   padding       : 10px 15px;
 }
 
@@ -321,6 +325,7 @@ select.custom-select{
     text-align : center;
   }
 
+  .replenishment_frm,
   .deposit_form {
     select {
       width : 100%;

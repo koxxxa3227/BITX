@@ -25,17 +25,25 @@
             background: rgba(76, 147, 76, .3) !important;
             color : #474747 !important;
         }
+
+
+        tr.canceled td{
+            background : rgba(255, 0, 0, .3) !important;
+            color      : #474747 !important;
+        }
     </style>
 @endpush
 
 @section("content")
     <div class="container my-2">
-        <h3 class="text-center">Заказы на выплаты</h3>
+        <h3 class="text-center">Пополнение и выплаты</h3>
         <div class="table-responsive">
             <table class="table mt-2 text-center table-hover">
                 <thead>
                 <tr>
                     <th class="text-center">Логин</th>
+                    <th class="text-center">Рефер</th>
+                    <th class="text-center">Тип</th>
                     <th class="text-center">Сумма</th>
                     <th class="text-center">Платежная система</th>
                     <th class="text-center">Дата создания</th>
@@ -44,19 +52,20 @@
                 </thead>
                 <tbody>
                 @foreach($payments as $payment)
-                    <tr class="{{$payment->status == "Оплачено" ? "success" : ""}}">
+                    <tr class="{{$payment->status == "Обработан" ? "success" : ""}} {{$payment->status == "Отменен" ? "canceled" : ""}}">
                         <td>{{$payment->user->login}}</td>
+                        <td>{{$payment->user->ref_login}}</td>
+                        <td>{{$payment->type}}</td>
                         <td>{{$payment->amount}} <i class="fa fa-usd"></i></td>
                         <td>{{$payment->payment_system}}</td>
                         <td>{{$payment->created_at->format("d.M.Y H:i")}}</td>
                         <td>
                             <form action="{{action('Admin\ActionController@updatePaymentStatus', $payment->id)}}" method="post">
                                 @csrf
-                                <select name="status" id="status" class="custom-select" onchange="this.form.submit();" {{$payment->status == "Оплачено" ? "disabled" : ""}}>
+                                <select name="status" id="status" class="custom-select" onchange="this.form.submit();" {{$payment->status != "В обработке" ? "disabled" : ""}}>
                                     <option value="В обработке" {{$payment->status == "В обработке" ? "selected" : ""}}>В обработке</option>
-                                    <option value="Ожидается оплата" {{$payment->status == "Ожидается оплата" ? "selected" : ""}}>Ожидается оплата</option>
-                                    <option value="Оплачено" {{$payment->status == "Оплачено" ? "selected" : ""}}>Оплачено</option>
-                                    <option value="Не оплачено" {{$payment->status == "Не оплачено" ? "selected" : ""}}>Не оплачено</option>
+                                    <option value="Обработан" {{$payment->status == "Обработан" ? "selected" : ""}}>Обработан</option>
+                                    <option value="Отменен" {{$payment->status == "Отменен" ? "selected" : ""}}>Отменен</option>
                                 </select>
                             </form>
                         </td>

@@ -32,17 +32,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
     Route::get('/user/id={id}', "Admin\PageController@editUser");
     Route::get('/payments', 'Admin\PageController@payments');
     Route::get('/deposits', 'Admin\PageController@deposits');
+    Route::get('/wallet-instruction', 'Admin\PageController@walletInstruction');
+
     Route::group(['prefix' => 'post'], function(){
         Route::post('/user/id={id}/save', 'Admin\ActionController@editUserSaver');
         Route::post('/payment/update-status/id={id}', "Admin\ActionController@updatePaymentStatus");
         Route::post('/deposit/update-status/id={id}', "Admin\ActionController@updateDepositStatus");
+        Route::post('/wallet-instruction/save', 'Admin\ActionController@walletInstructionSaver');
     });
 });
 
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
-    Route::get('/', function(){ return redirect()->action('Profile\PageController@deposit'); });
+    Route::get('/', function(){ return redirect()->action('Profile\PageController@cabinet'); });
     Route::get('/deposit', 'Profile\PageController@deposit');
-    Route::get('/payments', 'Profile\PageController@payments');
+    Route::get('/balance/{popup?}', 'Profile\PageController@payments');
     Route::get('/cabinet', 'Profile\PageController@cabinet');
     Route::get('/refs', 'Profile\PageController@refs');
 
@@ -51,5 +54,6 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
         Route::post('/personal-wallets-saver', 'Profile\ActionController@personalWalletsSaver');
         Route::post('/payments-request', 'Profile\ActionController@paymentsRequest');
         Route::post('/deposit-request', 'Profile\ActionController@depositsRequest');
+        Route::post('/replenishment-request', 'Profile\ActionController@replenishmentRequest');
     });
 });

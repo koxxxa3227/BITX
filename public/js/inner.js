@@ -3,7 +3,7 @@ $(document).ready(function (e) {
         var $anchor = $(this);
         var href = $anchor.attr('href');
         $('html, body').stop().animate({
-            scrollTop: $(href).offset().top - 91
+            scrollTop: $(href).offset().top - 75
         }, 1500, 'easeInOutExpo');
         /*
         if you don't want to use the easing effects:

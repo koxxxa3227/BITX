@@ -112,7 +112,8 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <button name="register_frm_btn" type="submit" class="button-blue">Зарегистрироваться</button>
+                            <button name="register_frm_btn" type="submit" class="button-blue">Зарегистрироваться
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -123,10 +124,20 @@
 
 @push('script')
     <script>
-        $(function(){
-           var href = location.href;
-           href = href.replace('http://{{$_SERVER['HTTP_HOST']}}/register?ref=', '');
-           $('[name="ref"]').val(href);
+        $(function () {
+            var domen = location.protocol + '//' + location.host;
+            var ref = $.cookie('ref');
+            if (!ref) {
+                if (location.href != domen + "/register") {
+                    ref = location.href;
+                    ref = ref.replace(domen + '/register?ref=', '');
+                    var date = new Date();
+                    date.setDate(date.getDate() + (30 * 60 * 1000));
+                    $.cookie('ref', ref, {expires: date});
+                }
+            }
+            if (ref) $('[name="ref"]').val(ref);
+            else $('[name="ref"]').val('');
         });
     </script>
 @endpush
