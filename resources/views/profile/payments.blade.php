@@ -211,59 +211,41 @@
                 </form>
             </div>
             <div class="row my-2">
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-offset-3">
                     <div class="table-responsive">
-                        <h4 class="text-center">История пополнений:</h4>
+                        <h4 class="text-center">История платежей:</h4>
                         <table class="table text-center">
                             <thead>
                             <tr>
                                 <th class="text-center">Дата</th>
                                 <th class="text-center">Сумма (<i class="fa fa-usd"></i>)</th>
+                                <th class="text-center">Тип</th>
                                 <th class="text-center">Система</th>
                                 <th class="text-center">Статус</th>
+                                <th class="text-center"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($myPayments as $myPayment)
+                            @foreach($payments as $payment)
                                 <tr>
-                                    <td>{{$myPayment->created_at->format("d.M.Y H:i")}}</td>
-                                    <td>{{$myPayment->amount}}</td>
-                                    <td>{{$myPayment->payment_system}}</td>
-                                    <td>{{$myPayment->status}}</td>
+                                    <td>{{$payment->created_at->format("d.m.Y H:i")}}</td>
+                                    <td>{{$payment->amount}}</td>
+                                    <td>{{$payment->type}}</td>
+                                    <td>{{$payment->payment_system ?: "Не указано"}}</td>
+                                    <td>
+                                        @lang("Payment Status $payment->status_id")
+                                    </td>
+                                    <td>
+                                        @if($payment->status_id == 1 && $payment->payment_system == 'adv')
+                                            <a class="btn btn-sm btn-success" href="{{ action('AdvCashController@pay',$payment->id) }}">Оплатить</a>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                         <div class="text-center">
-                            {{$myPayments->links()}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="table-responsive">
-                        <h4 class="text-center">История выводов:</h4>
-                        <table class="table text-center">
-                            <thead>
-                            <tr>
-                                <th class="text-center">Дата</th>
-                                <th class="text-center">Сумма (<i class="fa fa-usd"></i>)</th>
-                                <th class="text-center">Система</th>
-                                <th class="text-center">Статус</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($myWithdraws as $myWithdraw)
-                                <tr>
-                                    <td>{{$myWithdraw->created_at->format("d.M.Y H:i")}}</td>
-                                    <td>{{$myWithdraw->amount}}</td>
-                                    <td>{{$myWithdraw->payment_system}}</td>
-                                    <td>{{$myWithdraw->status}}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        <div class="text-center">
-                            {{$myWithdraws->links()}}
+                            {{ $payments->links() }}
                         </div>
                     </div>
                 </div>

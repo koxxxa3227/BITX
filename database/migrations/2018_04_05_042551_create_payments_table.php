@@ -16,9 +16,9 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("user_id");
-            $table->string('payment_system');
+            $table->string('payment_system')->nullable();
             $table->string('amount');
-            $table->string('status')->default('В обработке');
+            $table->unsignedInteger('status_id')->default(1);
             $table->timestamps();
         });
     }

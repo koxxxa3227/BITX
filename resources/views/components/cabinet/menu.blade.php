@@ -4,6 +4,7 @@
         <li role="presentation" class="{{$value == 1 ? "active" : ""}}"><a href="{{action('Profile\PageController@deposit')}}">Депозит</a></li>
         <li role="presentation" class="{{$value == 2 ? "active" : ""}}"><a href="{{action('Profile\PageController@payments')}}">Баланс</a></li>
         <li role="presentation" class="{{$value == 4 ? "active" : ""}}"><a href="{{action('Profile\PageController@refs')}}">Рефералы</a></li>
+        <li role="presentation"><a href="{{route('logout')}}">Выход</a></li>
     </ul>
 </div>
 <div class="col-md-6">
@@ -11,28 +12,28 @@
         <div class="col-md-3 col-sm-6 mt-sm-2">
             <div class="rounded text-center border menu-info-item m-auto">
                 <small class="text-secondary">Баланс:</small>
-                <p class="mt-2"><strong>{{$me->money}} <i class="fa fa-usd"></i></strong></p>
+                <p class="mt-2"><strong>{{number_format($me->money, 2, '.', ' ')}} <i class="fa fa-usd"></i></strong></p>
                 <p class="mt-1"><a href="{{action('Profile\PageController@payments')}}">Пополнить</a></p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6 mt-sm-2">
             <div class="rounded text-center border menu-info-item m-auto">
                 <small class="text-secondary">Доход от инвестиций:</small>
-                <p><strong>0.00 <i class="fa fa-usd"></i></strong></p>
+                <p><strong>{{allIncomesFromDeposits()}} <i class="fa fa-usd"></i></strong></p>
                 <p class="check-circle"><i class="fa fa-check"></i></p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6 mt-sm-2">
             <div class="rounded text-center border menu-info-item m-auto">
                 <small class="text-secondary">Общий реферальный доход:</small>
-                <p><strong>0.00 <i class="fa fa-usd"></i></strong></p>
+                <p><strong>{{allRefsSum()}} <i class="fa fa-usd"></i></strong></p>
                 <p class="check-circle"><i class="fa fa-check"></i></p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6 mt-sm-2">
             <div class="rounded text-center border menu-info-item m-auto">
                 <small class="text-secondary">Всего <br> выплачено:</small>
-                <p><strong>0.00 <i class="fa fa-usd"></i></strong></p>
+                <p><strong>{{allMyPayments()}} <i class="fa fa-usd"></i></strong></p>
                 <p class="check-circle"><i class="fa fa-check"></i></p>
             </div>
         </div>

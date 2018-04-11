@@ -1,9 +1,15 @@
+#php_flag display_startup_errors on
+#php_flag display_errors on
+#php_flag html_errors on
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
    </IfModule>
 
-    RewriteEngine On
+    
+	RewriteEngine on
+	RewriteCond %{HTTPS} off
+	RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

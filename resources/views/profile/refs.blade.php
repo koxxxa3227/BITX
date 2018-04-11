@@ -29,7 +29,7 @@
                     <div class="col-sm-6">
                         <div class="rounded text-center border menu-info-item m-auto">
                             <small class="text-secondary">Всего <br> активных:</small>
-                            <p class="fz-20 counter-style"><strong>0</strong></p>
+                            <p class="fz-20 counter-style"><strong>{{isActiveRefsCount()}}</strong></p>
                             <p class="check-circle"><i class="fa fa-check"></i></p>
                         </div>
                     </div>
@@ -50,14 +50,17 @@
                         <tbody>
                         @foreach($myRefs as $key=>$myRef)
                             <tr class="text-center">
-                                <td class="text-left">{{$myRef->login}}</td>
+                                <td class="text-left">{{$key+1}}. {{$myRef->login}}</td>
                                 <td>{{$myRef->created_at}}</td>
-                                <td>0.00 $</td>
-                                <td>0.00 $</td>
+                                <td>{{myRefsPayments($myRef->id)}} <i class="fa fa-usd"></i></td>
+                                <td>{{RefsReward($myRef->id)}} <i class="fa fa-usd"></i></td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="text-center">
+                        {{$myRefs->links()}}
+                    </div>
                 </div>
             </div>
         </div>

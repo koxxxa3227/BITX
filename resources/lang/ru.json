@@ -5,5 +5,8 @@
     "btc" : "Bitcoin",
     "eth" : "Ethereum",
     "user" : "Пользователь",
-    "admin" : "Администратор"
+    "admin" : "Администратор",
+    "Payment Status 1": "В обработке",
+    "Payment Status 2": "Обработан",
+    "Payment Status 3": "Отменен"
 }

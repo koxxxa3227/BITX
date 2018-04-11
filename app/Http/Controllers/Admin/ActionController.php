@@ -27,14 +27,39 @@ class ActionController extends Controller
         return redirect()->action('Admin\PageController@users');
     }
 
+    public function addBonus(Request $request, $id){
+        if($request->bonus_amount){
+            $user = User::findOrFail($id);
+
+            $payment = new Payment();
+
+            $payment->user_id = $id;
+            $payment->type = 'Бонус';
+            $payment->amount = $request->bonus_amount;
+            $payment->status_id = 2;
+
+            $payment->save();
+
+            $result = true;
+            \Session::flash('success', 'Бонус успешно добавлен');
+        } else {
+            $result = false;
+            \Session::flash('success', 'Сначало заполните поле необходимой суммой');
+        }
+
+        return [
+            'result' => $result
+        ];
+    }
+
 
     public function updatePaymentStatus(Request $request, $id){
         $payment = Payment::findOrFail($id);
 
-        $payment->status = $request->status;
+        $payment->status_id = $request->status_id;
         $payment->save();
 
-        if($request->status == "Обработан"){
+        if($request->status_id == 2){
             $ref = $payment->user->ref_login;
             if($ref){
                 $reffer = User::whereLogin($ref)->first();

@@ -8,19 +8,19 @@
                         <div class="contact_block">
                             <div class="contact_block_icon rollIn animated wow"><span><i class="fa-home"></i></span>
                             </div>
-                            <span>6 Kirby Street, London,<br> United Kingdom, EC1N 8TS</span></div>
+                            <span>5 Preston Court, Burton Latimer, <br> United Kingdom, NN15 5LR</span></div>
                     </div>
                     <div class="col-lg-4">
                         <div class="contact_block">
                             <div class="contact_block_icon icon2 rollIn animated wow"><span><a
-                                            href="skype:live:bitxsupport?call"> <i
+                                            href="skype:live:future.trade_1?call"> <i
                                                 class="fa-skype"></i></a></span></div>
                             <span><a href="skype:live:bitxsupport?call"> SKYPE</a></span></div>
                     </div>
                     <div class="col-lg-4">
                         <div class="contact_block">
                             <div class="contact_block_icon icon3 rollIn animated wow"><span><a
-                                            href="https://t.me/bitx_space"><i
+                                            href="https://t.me/futuretradeclub"><i
                                                 class="fa-send"></i></a></span></div>
                             <span> <a href="https://t.me/bitx_space">TELEGRAM</a> </span></div>
                     </div>
@@ -79,7 +79,7 @@
     </div>
     <div class="container">
         <div class="footer_bottom">
-            <span>© 2018 BITX CRYPTO MINING & TRADING LIMITED. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</span>
+            <span>© 2018 FUTURE TRADE BITCOIN MINING LTD. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</span>
         </div>
     </div>
 </footer>

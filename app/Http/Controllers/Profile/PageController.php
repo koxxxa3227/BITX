@@ -8,7 +8,7 @@ use App\User;
 
 class PageController extends Controller
 {
-    public function deposit(){
+    public function deposit($plan_id = ''){
         $view = view("profile.deposit");
         $view->me = $me = \Auth::user();
         $view->plans = Plan::all();
@@ -19,8 +19,7 @@ class PageController extends Controller
     public function payments($popup = ''){
         $view = view("profile.payments");
         $view->me = $me = \Auth::user();
-        $view->myPayments = $me->myPayments()->whereType('Пополнение')->orderBy('id', 'desc')->paginate(10);
-        $view->myWithdraws = $me->myPayments()->whereType('Вывод')->orderBy('id', 'desc')->paginate(10);
+        $view->payments = $me->payments()->orderBy('id', 'desc')->paginate(10);
         $view->popup = $popup;
         return $view;
     }
@@ -30,6 +29,7 @@ class PageController extends Controller
         $view->me = $me = \Auth::user();
         $refs = User::whereRefLogin($me->lower_login);
         $view->myWallets = $me->myWallets;
+        $view->depositRewards = $me->depositReward;
         return $view;
     }
 
@@ -37,7 +37,7 @@ class PageController extends Controller
         $view = view("profile.refs");
         $view->me = $me = \Auth::user();
         $refs = User::whereRefLogin($me->lower_login);
-        $view->myRefs = $refs->get();
+        $view->myRefs = $refs->paginate(5);
         $view->myRefsCount = $refs->count();
         return $view;
     }

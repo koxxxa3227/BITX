@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('skype')->nullable()->unique();
             $table->string('telegram')->nullable()->unique();
             $table->string('role')->default('user');
+            $table->boolean('is_active')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

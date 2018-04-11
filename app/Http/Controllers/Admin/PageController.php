@@ -28,7 +28,8 @@ class PageController extends Controller
     public function editUser($id){
         $view = view("admin.users.editUser");
         $view->me = \Auth::user();
-        $view->user = User::findOrFail($id);
+        $view->user = $user = User::findOrFail($id);
+        $view->payments = $user->payments()->orderBy('id', 'desc')->paginate(10);
         return $view;
     }
 

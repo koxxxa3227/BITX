@@ -2,6 +2,11 @@
 
 namespace App\Console;
 
+use App\Models\Payment;
+use App\Notifications\DepositDailyPaymentNotification;
+use App\Notifications\RefNotification;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +29,30 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function () {
+            $users = User::with('userDepositStatusFalse')->get();
+            foreach ($users as $user){
+                $dayliPayment = mailDailyPayment($user);
+                if($dayliPayment){
+                    $user->notify(new DepositDailyPaymentNotification($dayliPayment));
+                }
+            }
+        })->dailyAt('00:01');
+
+        $schedule->call(function () {
+            $users = User::with('refPaymentsLastDay.payFrom')->get();
+            foreach ($users as $user){
+                $user->notify(new RefNotification($user->refPaymentsLastDay));
+            }
+        })->dailyAt('09:00');
+
+//        $schedule->call(function () {
+//            $users = User::whereId(1)->with('refPaymentsLastDay.payFrom')->get();
+//            foreach ($users as $user){
+//                $user->notify(new RefNotification($user->refPaymentsLastDay));
+//            }
+//        });
+
     }
 
     /**

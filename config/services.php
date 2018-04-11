@@ -34,5 +34,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+	'advcash' => [
+		'email' => 'wallet@futuretrade.club',
+		'sci_name' => 'Future Trade Club',
+		'secret' => 'EP4RHGycIr2i!'
+	]
 
 ];

@@ -39,12 +39,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
         Route::post('/payment/update-status/id={id}', "Admin\ActionController@updatePaymentStatus");
         Route::post('/deposit/update-status/id={id}', "Admin\ActionController@updateDepositStatus");
         Route::post('/wallet-instruction/save', 'Admin\ActionController@walletInstructionSaver');
+        Route::post('/add-bonus/{id}', 'Admin\ActionController@addBonus');
     });
 });
 
-Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'profile', 'middleware' => ['auth', 'depositAccrued']], function(){
     Route::get('/', function(){ return redirect()->action('Profile\PageController@cabinet'); });
-    Route::get('/deposit', 'Profile\PageController@deposit');
+    Route::get('/deposit/{deposit?}', 'Profile\PageController@deposit');
     Route::get('/balance/{popup?}', 'Profile\PageController@payments');
     Route::get('/cabinet', 'Profile\PageController@cabinet');
     Route::get('/refs', 'Profile\PageController@refs');
@@ -56,4 +57,11 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function(){
         Route::post('/deposit-request', 'Profile\ActionController@depositsRequest');
         Route::post('/replenishment-request', 'Profile\ActionController@replenishmentRequest');
     });
+});
+
+Route::group(['prefix' => 'advcash'],function(){
+	Route::get('pay/{id}','AdvCashController@pay');
+	Route::get('status','AdvCashController@status');
+	Route::get('success','AdvCashController@success');
+	Route::get('fail','AdvCashController@fail');
 });

@@ -1,5 +1,21 @@
 @extends("layouts.app")
 
+@push('style')
+    <style>
+        .deposit_form select {
+            width : 100%;
+        }
+
+        .text-success {
+            color : #38ae37;
+        }
+
+        .show-incomes:hover{
+            cursor : pointer;
+        }
+    </style>
+@endpush
+
 @section("content")
     <div class="container my-2">
         <div class="row">
@@ -15,9 +31,9 @@
                     <div class="col-md-4 text-center">
                         <div class="form-group">
                             <label for="invest_plan">Выберите инвестиционный план:</label> <br>
-                            <select name="invest_plan" id="invest_plan" class="text-uppercase invest_plan" required>
+                            <select name="invest_plan" id="invest_plan" class="text-uppercase invest_plan">
                                 @foreach($plans as $select_plan)
-                                    <option value="{{$select_plan->id}}" {{$select_plan->id == $key+1 ? "selected" : ""}}>{{$select_plan->title}}</option>
+                                    <option value="{{$select_plan->id}}" {{($select_plan->id == $plan->id) ? "selected" : ""}}>{{$select_plan->title}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -32,7 +48,8 @@
                                id="payment_amount_{{$plan->id}}">
                     </div>
                     <div class="col-md-4 text-center">
-                        <label for="income_amount_{{$plan->id}}">Доход от депозита (<i
+                        <label for="income_amount_{{$plan->id}}">Прибыль от депозита за {{$plan->days_multiply}} дней
+                            (<i
                                     class="fa fa-usd"></i>)</label>
                         <input type="text" class="form-control"
                                value="{{$plan->min_amount + ($plan->min_amount * $plan->percent / 100)*$plan->days_multiply}}"
@@ -41,38 +58,75 @@
                         @if($key+1 == 4)
                             Оплата раз в 14 дней
                         @endif
-                        <button class="btn btn-primary btn-block mt-1">Инверстировать</button>
+                        <button class="btn btn-primary btn-block mt-1">Инвестировать</button>
                     </div>
                 </div>
             </form>
         @endforeach
         <div class="row my-2">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-8 col-md-offset-2">
                 <div class="table-responsive">
                     <h4 class="text-center">История:</h4>
-                    <table class="table text-center">
-                        <thead>
-                        <tr>
-                            <th class="text-center">Дата</th>
-                            <th class="text-center">План</th>
-                            <th class="text-center">Сумма</th>
-                            <th class="text-center">Начислено</th>
-                            <th class="text-center">Всего</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($myDeposits as $myDeposit)
-                            <tr>
-                                <td>{{$myDeposit->created_at->format("d.M.Y H:i")}}</td>
-                                <td class="text-uppercase">{{$myDeposit->plan->title}}</td>
-                                <td>{{$myDeposit->payment_amount}} <i class="fa fa-usd"></i></td>
-                                <td>{{$myDeposit->income_with_percent - $myDeposit->payment_amount}} <i
-                                            class="fa fa-usd"></i></td>
-                                <td>{{$myDeposit->income_with_percent}} <i class="fa fa-usd"></i></td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                    {{--<table class="table text-center">--}}
+                    {{--<thead>--}}
+                    {{--<tr>--}}
+                    {{--<th class="text-center">Дата</th>--}}
+                    {{--<th class="text-center">План</th>--}}
+                    {{--<th class="text-center">Сумма</th>--}}
+                    {{--<th class="text-center">Статус</th>--}}
+                    {{--</tr>--}}
+                    {{--</thead>--}}
+                    {{--<tbody>--}}
+                    {{--@foreach($myDeposits as $myDeposit)--}}
+                    {{--<tr>--}}
+                    {{--<td>{{$myDeposit->created_at->format("d.m.Y H:i")}}</td>--}}
+                    {{--<td class="text-uppercase">{{$myDeposit->plan->title}}</td>--}}
+                    {{--<td>{{$myDeposit->payment_amount}} <i class="fa fa-usd"></i></td>--}}
+                    {{--<td>{{endDate($myDeposit->created_at, $myDeposit->plan->days_multiply)}}--}}
+                    {{--будет начислено {{$myDeposit->income_with_percent + $myDeposit->payment_amount}}--}}
+                    {{--<i class="fa fa-usd"></i>--}}
+                    {{--<br>--}}
+                    {{--<span class="text-success">Заработано {{$myDeposit->accrued}} <i class="fa fa-usd"></i></span>--}}
+                    {{--</td>--}}
+                    {{--</tr>--}}
+                    {{--@endforeach--}}
+                    {{--</tbody>--}}
+                    {{--</table>--}}
+
+                    <div class="row text-center">
+                        <div class="col-md-3"><h3 class="text-weight-bold">Дата</h3></div>
+                        <div class="col-md-2"><h3 class="text-weight-bold">План</h3></div>
+                        <div class="col-md-2"><h3 class="text-weight-bold">Сумма</h3></div>
+                        <div class="col-md-5"><h3 class="text-weight-bold">Статус</h3></div>
+                    </div>
+                    <hr>
+                    @foreach($myDeposits as $key=>$myDeposit)
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                {{$myDeposit->created_at->format("d.m.Y H:i")}}
+                            </div>
+                            <div class="col-md-2 text-uppercase">
+                                {{$myDeposit->plan->title}}
+                            </div>
+                            <div class="col-md-2">
+                                {{$myDeposit->payment_amount}} <i class="fa fa-usd"></i>
+                            </div>
+                            <div class="col-md-5">
+                                {{endDate($myDeposit->created_at, $myDeposit->plan->days_multiply)}}
+                                будет начислено {{$myDeposit->income_with_percent + $myDeposit->payment_amount}}
+                                <i class="fa fa-usd"></i>
+                                <br>
+                                <span class="text-success show-incomes" id="{{$key+1}}">Заработано {{$myDeposit->accrued}} <i class="fa fa-usd"></i></span>
+                            </div>
+                        </div>
+                        <div id="hidden-incomes_{{$key+1}}" class="row text-center d-none">
+                            @foreach(AllMyDeposits($myDeposit->id) as $item)
+                                <div class="col-md-3">{{$item->created_at->format("d.m.Y H:i")}}</div>
+                                <div class="col-md-5 col-md-offset-4 text-success">Прибыль {{$item->amount}} <i class="fa fa-usd"></i></div>
+                            @endforeach
+                        </div>
+                        <hr>
+                    @endforeach
                 </div>
                 <div class="text-center">
                     {{$myDeposits->links()}}
@@ -85,12 +139,27 @@
 @push('script')
     <script>
         $(function () {
-            $('.invest_plan').on('change', function () {
+            var href = location.href, id = href.replace('https://' + location.host + '/profile/deposit/', '');
+            if (id != location.href) {
+                $('.deposit_form').addClass('d-none');
+                $('.deposit_form_' + id).removeClass('d-none');
+                $('.invest_plan option').removeAttr('selected');
+                $('.deposit_form_' + id + ' .invest_plan option[value="' + id + '"]').attr('selected', true);
+            }
+
+            $(document).on('change', '.invest_plan', function () {
                 $('.deposit_form').addClass('d-none');
                 var target = $(this).val();
-                var new_target = 'deposit_form_' + target;
-                $('.' + new_target).removeClass('d-none');
+                var new_target = '.deposit_form_' + target;
+                $(new_target).removeClass('d-none');
+                $('.invest_plan option').removeAttr('selected');
+                $(new_target + ' .invest_plan option[value="' + target + '"]').attr('selected', true);
             });
+
+            $('.show-incomes').on('click', function (e) {
+                var target = $(e.target).attr('id');
+                $('#hidden-incomes_'+target).slideToggle();
+            })
         });
     </script>
 @endpush

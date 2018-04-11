@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1">
-    <title>BTIX Space</title>
+    <title>Future Trade Club</title>
     <link rel="icon" href="/img/favicon.ico" type="image/icon">
+    <link rel="icon" href="/img/future_trade_club_logo.png" type="image/png">
     <link href="/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <link href="/css/linecons.css" rel="stylesheet" type="text/css">

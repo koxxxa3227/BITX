@@ -71,10 +71,10 @@
                                     </div>
                                     <div class="form_group_wrapper{{ $errors->has('ref') ? ' is-invalid' : '' }}">
                                         <label for="register_frm_Pass2">
-                                            Укажите пригласителя<span class="descr_star">*</span>
+                                            Укажите пригласителя
                                         </label>
                                         <input type="text" name="ref" placeholder="Логин пригласителя" class="inputs"
-                                               size="30" required="" readonly>
+                                               size="30" readonly>
 
 
                                         @if ($errors->has('ref'))

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Models\Deposit;
+use App\Models\DepositAccrued;
 use App\Models\Payment;
 use App\Models\Plan;
 use App\Models\Wallet;
+use App\Notifications\DepositCreatorNotification;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -96,11 +99,36 @@ class ActionController extends Controller
             $deposit->user_id = $me->id;
             $deposit->plan_id = $request->hidden_plan_id;
             $deposit->payment_amount = $request->payment_amount;
-            $deposit->income_with_percent = $request->payment_amount + ($request->payment_amount * $plan->percent / 100) * $plan->days_multiply;
+            $result = $request->payment_amount * $plan->percent / 100 * $plan->days_multiply;
+            $deposit->income_with_percent = number_format($result, 2, '.', ' ');
 
-            $deposit->save();
+                $deposit->save();
+
+            $reffer = $me->reffer;
+            if($reffer) {
+                $payment = new Payment();
+
+                $payment->user_id = $reffer->id;
+                $payment->type = "Реферальное вознаграждение";
+                $payment->amount = $request->payment_amount * .11;
+                $payment->status_id = 2;
+
+                $payment->save();
+                $me->reffer->increment('money', $request->payment_amount * .11);
+            }
+
+            $depositAccrued = new DepositAccrued();
+
+            $depositAccrued->user_id = $me->id;
+            $depositAccrued->deposit_id = $deposit->id;
+            $depositAccrued->last_accrued = Carbon::now();
+            $depositAccrued->end_date = Carbon::now()->addDays($deposit->plan->days_multiply);
+
+            $depositAccrued->save();
 
             $me->increment('money', -$request->payment_amount);
+
+            $me->notify(new DepositCreatorNotification($deposit));
 
             \Session::flash('status', 'Депозит создан');
         } else {
@@ -125,7 +153,7 @@ class ActionController extends Controller
 
         $view = view('profile.payments');
         $view->me = $me;
-        $view->myPayments = $me->myPayments()->orderBy('id', 'desc')->paginate(10);
+        $view->payments = $me->payments()->orderBy('id', 'desc')->paginate(10);
         $view->popup = $payment_system;
 
         return redirect()->action('Profile\PageController@payments', $payment_system);

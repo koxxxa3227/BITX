@@ -19,7 +19,7 @@ class CreateDepositsTable extends Migration
             $table->integer("plan_id");
             $table->text("payment_amount");
             $table->text("income_with_percent");
-            $table->text("payment_system");
+            $table->text("accrued")->default('0');
             $table->string("status")->default('В обработке');
             $table->timestamps();
         });

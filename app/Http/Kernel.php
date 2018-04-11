@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\checkDepositStatus;
+use App\Http\Middleware\DepositAccrued;
 use App\Http\Middleware\isAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -61,5 +63,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'isAdmin' => isAdmin::class,
+        'depositAccrued' => DepositAccrued::class,
     ];
 }

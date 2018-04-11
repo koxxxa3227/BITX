@@ -52,7 +52,7 @@
                 </thead>
                 <tbody>
                 @foreach($payments as $payment)
-                    <tr class="{{$payment->status == "Обработан" ? "success" : ""}} {{$payment->status == "Отменен" ? "canceled" : ""}}">
+                    <tr class="{{$payment->status_id == 2 ? "success" : ""}} {{$payment->status_id == 3 ? "canceled" : ""}}">
                         <td>{{$payment->user->login}}</td>
                         <td>{{$payment->user->ref_login}}</td>
                         <td>{{$payment->type}}</td>
@@ -62,10 +62,10 @@
                         <td>
                             <form action="{{action('Admin\ActionController@updatePaymentStatus', $payment->id)}}" method="post">
                                 @csrf
-                                <select name="status" id="status" class="custom-select" onchange="this.form.submit();" {{$payment->status != "В обработке" ? "disabled" : ""}}>
-                                    <option value="В обработке" {{$payment->status == "В обработке" ? "selected" : ""}}>В обработке</option>
-                                    <option value="Обработан" {{$payment->status == "Обработан" ? "selected" : ""}}>Обработан</option>
-                                    <option value="Отменен" {{$payment->status == "Отменен" ? "selected" : ""}}>Отменен</option>
+                                <select name="status_id" id="status" class="custom-select" onchange="this.form.submit();" {{$payment->status_id != 1 ? "disabled" : ""}}>
+                                    <option value="1" {{$payment->status_id == 1 ? "selected" : ""}}>В обработке</option>
+                                    <option value="2" {{$payment->status_id == 2 ? "selected" : ""}}>Обработан</option>
+                                    <option value="3" {{$payment->status_id == 3 ? "selected" : ""}}>Отменен</option>
                                 </select>
                             </form>
                         </td>

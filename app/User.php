@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Models\Deposit;
+use App\Models\DepositAccrued;
+use App\Models\DepositRewards;
 use App\Models\Payment;
 use App\Models\Wallet;
 use Carbon\Carbon;
@@ -32,22 +34,43 @@ class User extends Authenticatable
     ];
 
     function getCreatedAtAttribute($value){
-        return Carbon::parse($value)->format('d.M.Y H:i');
+        return Carbon::parse($value)->format('d.m.Y H:i');
     }
 
     public function myWallets(){
-        return $this->hasOne(Wallet::class, 'user_id');
-    }
-
-    public function myPayments(){
-        return $this->hasMany(Payment::class, 'user_id');
+        return $this->hasOne(Wallet::class);
     }
 
     public function myDeposits(){
-        return $this->hasMany(Deposit::class, 'user_id');
+        return $this->hasMany(Deposit::class);
     }
 
     public function refs(){
         return $this->belongsTo(User::class, 'ref_login', 'login');
+    }
+
+    public function reffer(){
+        return $this->belongsTo(User::class, 'ref_login', 'lower_login');
+    }
+
+    public function depositsAccrued(){
+        return $this->hasMany(DepositAccrued::class);
+    }
+
+    public function payments(){
+        return $this->hasMany(Payment::class);
+    }
+
+    public function refPaymentsLastDay(){
+        $day = Carbon::yesterday()->format('Y-m-d');
+        return $this->hasMany(Payment::class)->whereType('Реферальное вознаграждение')->where('created_at', 'like' , "$day %");
+    }
+
+    public function userDepositStatusFalse(){
+        return $this->hasMany(Deposit::class)->whereStatus('В обработке');
+    }
+
+    public function depositReward(){
+        return $this->hasMany(DepositRewards::class);
     }
 }
