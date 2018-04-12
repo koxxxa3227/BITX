@@ -34,7 +34,9 @@ function RefsReward($id)
         ->get()
         ->sum('amount');
 
-    return $reward ? $reward : '0.00';
+    $reward = money($reward);
+
+    return $reward;
 }
 
 function myRefsPayments($id)
@@ -44,7 +46,9 @@ function myRefsPayments($id)
         ->get()
         ->sum('payment_amount');
 
-    return $payments ? $payments : '0';
+    $payments = money($payments);
+
+    return $payments;
 }
 
 function textTable($headers,$data,$options = []){
@@ -103,7 +107,7 @@ function textTable($headers,$data,$options = []){
 function mailDailyPayment($user){
     $today = \Carbon\Carbon::today();
     $deposits = $user->userDepositStatusFalse;
-    $dailyPayment = false;
+    $dailyPaymentTotal = false;
     foreach ($deposits as $deposit) {
         $endDate = \Carbon\Carbon::parse($deposit->created_at)->addDays($deposit->plan->days_multiply);
         if ($today <= $endDate) {
@@ -118,11 +122,19 @@ function mailDailyPayment($user){
 
             $depositReward->save();
 
-            $dailyPayment = money($dailyPayment);
+            $dailyPaymentTotal += $dailyPayment;
             $user->increment('money', $dailyPayment);
         } else {
-            $deposit->update(['status' => 'Обработан']);
+            if($deposit->plan_id != 4) {
+                $deposit->update(['status' => 'Обработан']);
+            }
+
+            $user->increment('money', $deposit->payment_amount);
         }
+    }
+
+    if(!empty($dailyPayment)){
+        $dailyPayment = money($dailyPayment);
     }
 
     return !empty($dailyPayment) ? $dailyPayment : null;
@@ -142,8 +154,8 @@ function allRefsSum(){
 }
 
 function allIncomesFromDeposits(){
-    $total = \App\Models\Deposit::whereUserId(\Auth::user()->id)
-        ->whereStatus('Обработан')->get()->sum('income_with_percent');
+    $total = \App\Models\DepositRewards::whereUserId(\Auth::user()->id)
+        ->get()->sum('amount');
     $total = money($total);
     return $total;
 }
@@ -154,4 +166,18 @@ function allMyPayments(){
     $total = money($total);
 
     return $total;
+}
+
+function accruedMoney($id){
+    $deposit = \App\Models\DepositRewards::whereUserId(\Auth::user()->id)
+        ->whereDepositId($id)->get()->sum('amount');
+    $deposit = money($deposit);
+
+    return $deposit;
+}
+
+function businessProLeftDay($deposit){
+    $now = \Carbon\Carbon::now();
+    $pay_date = \Carbon\Carbon::parse($deposit->created_at)->copy()->addDays(14);
+    return $pay_date->diffInDays($now);
 }

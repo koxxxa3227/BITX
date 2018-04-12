@@ -43,7 +43,7 @@
                         <tr>
                             <th>Логин</th>
                             <th class="text-center">Дата</th>
-                            <th class="text-center">Пополнение (<i class="fa fa-usd"></i>)</th>
+                            <th class="text-center">Депозиты (<i class="fa fa-usd"></i>)</th>
                             <th class="text-center">Реферальные (<i class="fa fa-usd"></i>)</th>
                         </tr>
                         </thead>

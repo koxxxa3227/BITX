@@ -10,7 +10,7 @@
             color : #38ae37;
         }
 
-        .show-incomes:hover{
+        .show-incomes:hover {
             cursor : pointer;
         }
     </style>
@@ -67,37 +67,11 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="table-responsive">
                     <h4 class="text-center">История:</h4>
-                    {{--<table class="table text-center">--}}
-                    {{--<thead>--}}
-                    {{--<tr>--}}
-                    {{--<th class="text-center">Дата</th>--}}
-                    {{--<th class="text-center">План</th>--}}
-                    {{--<th class="text-center">Сумма</th>--}}
-                    {{--<th class="text-center">Статус</th>--}}
-                    {{--</tr>--}}
-                    {{--</thead>--}}
-                    {{--<tbody>--}}
-                    {{--@foreach($myDeposits as $myDeposit)--}}
-                    {{--<tr>--}}
-                    {{--<td>{{$myDeposit->created_at->format("d.m.Y H:i")}}</td>--}}
-                    {{--<td class="text-uppercase">{{$myDeposit->plan->title}}</td>--}}
-                    {{--<td>{{$myDeposit->payment_amount}} <i class="fa fa-usd"></i></td>--}}
-                    {{--<td>{{endDate($myDeposit->created_at, $myDeposit->plan->days_multiply)}}--}}
-                    {{--будет начислено {{$myDeposit->income_with_percent + $myDeposit->payment_amount}}--}}
-                    {{--<i class="fa fa-usd"></i>--}}
-                    {{--<br>--}}
-                    {{--<span class="text-success">Заработано {{$myDeposit->accrued}} <i class="fa fa-usd"></i></span>--}}
-                    {{--</td>--}}
-                    {{--</tr>--}}
-                    {{--@endforeach--}}
-                    {{--</tbody>--}}
-                    {{--</table>--}}
-
                     <div class="row text-center">
-                        <div class="col-md-3"><h3 class="text-weight-bold">Дата</h3></div>
-                        <div class="col-md-2"><h3 class="text-weight-bold">План</h3></div>
-                        <div class="col-md-2"><h3 class="text-weight-bold">Сумма</h3></div>
-                        <div class="col-md-5"><h3 class="text-weight-bold">Статус</h3></div>
+                        <div class="col-sm-3"><h3 class="text-weight-bold">Дата</h3></div>
+                        <div class="col-sm-2"><h3 class="text-weight-bold">План</h3></div>
+                        <div class="col-sm-2"><h3 class="text-weight-bold">Сумма</h3></div>
+                        <div class="col-sm-5"><h3 class="text-weight-bold">Статус</h3></div>
                     </div>
                     <hr>
                     @foreach($myDeposits as $key=>$myDeposit)
@@ -109,21 +83,40 @@
                                 {{$myDeposit->plan->title}}
                             </div>
                             <div class="col-md-2">
-                                {{$myDeposit->payment_amount}} <i class="fa fa-usd"></i>
+                                {{money($myDeposit->payment_amount)}} <i class="fa fa-usd"></i>
                             </div>
                             <div class="col-md-5">
-                                {{endDate($myDeposit->created_at, $myDeposit->plan->days_multiply)}}
-                                будет начислено {{$myDeposit->income_with_percent + $myDeposit->payment_amount}}
-                                <i class="fa fa-usd"></i>
+                                @if($endDate = endDate($myDeposit->created_at, $myDeposit->plan->days_multiply))
+                                    @if(\Carbon\Carbon::parse($endDate) <= \Carbon\Carbon::now())
+                                        <span class="text-success">Завершен</span>.
+                                        {{$endDate}}
+                                        начислено {{money($myDeposit->payment_amount + $myDeposit->income_with_percent)}}
+                                        $
+                                    @elseif($myDeposit->plan->id == 4)
+                                        Бессрочно. Выплата раз в 14 дней. Через дней, вам будет начислено {{businessProLeftDay($myDeposit)}}
+                                    @else
+                                        {{$endDate}} будет
+                                        начислено {{money($myDeposit->income_with_percent + $myDeposit->payment_amount)}}
+                                        <i class="fa fa-usd"></i>
+                                    @endif
+                                @endif
                                 <br>
-                                <span class="text-success show-incomes" id="{{$key+1}}">Заработано {{$myDeposit->accrued}} <i class="fa fa-usd"></i></span>
+                                <span class="text-success show-incomes"
+                                      id="{{$key+1}}">Заработано {{accruedMoney($myDeposit->id)}} <i
+                                            class="fa fa-usd"></i></span>
+
                             </div>
                         </div>
                         <div id="hidden-incomes_{{$key+1}}" class="row text-center d-none">
-                            @foreach(AllMyDeposits($myDeposit->id) as $item)
-                                <div class="col-md-3">{{$item->created_at->format("d.m.Y H:i")}}</div>
-                                <div class="col-md-5 col-md-offset-4 text-success">Прибыль {{$item->amount}} <i class="fa fa-usd"></i></div>
-                            @endforeach
+                            @if(count(AllMyDeposits($myDeposit->id)) > 0)
+                                @foreach(AllMyDeposits($myDeposit->id) as $item)
+                                    <div class="col-md-3">{{$item->created_at->format("d.m.Y H:i")}}</div>
+                                    <div class="col-md-5 col-md-offset-4 text-success">Прибыль {{$item->amount}} <i
+                                                class="fa fa-usd"></i></div>
+                                @endforeach
+                            @else
+                                <div class="text-center">Ещё ничего не зачислено</div>
+                            @endif
                         </div>
                         <hr>
                     @endforeach
@@ -158,7 +151,7 @@
 
             $('.show-incomes').on('click', function (e) {
                 var target = $(e.target).attr('id');
-                $('#hidden-incomes_'+target).slideToggle();
+                $('#hidden-incomes_' + target).slideToggle();
             })
         });
     </script>

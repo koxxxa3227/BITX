@@ -30,7 +30,8 @@
                         <td>{{$user->skype}}</td>
                         <td>{{$user->telegram}}</td>
                         <td>
-                            <a href="{{action('Admin\PageController@editUser', $user->id)}}"><i class="fa fa-edit"></i></a>
+                            <a href="{{action('Admin\PageController@editUser', $user->id)}}" title="Редактировать"><i class="fa fa-edit"></i></a>
+                            <a href="{{action('Admin\PageController@openDeposit', $user->id)}}" data-toggle="tooltip" data-placement="right" title="Открыть депозит">%</a>
                         </td>
                     </tr>
                 @endforeach

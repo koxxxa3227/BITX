@@ -1,7 +1,15 @@
 <header id="header_outer">
     <div class="container">
         <div class="header_section">
-            <div class="logo"><a href="/"><img src="/img/future_trade_club_logo.png" width="200" alt=""></a></div>
+            <div class="logo"><a href="/"><img src="/img/future_trade_club_logo.png" width="200" alt=""></a>
+                @if(\Auth::check() && \Auth::user()->role == 'admin')
+                    <div class="text-center">
+                        <a href="{{action('Admin\PageController@index')}}">
+                            <small>Админка</small>
+                        </a>
+                    </div>
+                @endif
+            </div>
             <nav class="nav" id="nav">
                 <ul class="toggle">
                     <li><a href="{{!Request::is('/') ? "/" : ""}}#service">Преимущества</a></li>

@@ -15,14 +15,14 @@
                             <div class="contact_block_icon icon2 rollIn animated wow"><span><a
                                             href="skype:live:future.trade_1?call"> <i
                                                 class="fa-skype"></i></a></span></div>
-                            <span><a href="skype:live:bitxsupport?call"> SKYPE</a></span></div>
+                            <span><a href="skype:live:future.trade_1?call"> SKYPE</a></span></div>
                     </div>
                     <div class="col-lg-4">
                         <div class="contact_block">
                             <div class="contact_block_icon icon3 rollIn animated wow"><span><a
                                             href="https://t.me/futuretradeclub"><i
                                                 class="fa-send"></i></a></span></div>
-                            <span> <a href="https://t.me/bitx_space">TELEGRAM</a> </span></div>
+                            <span> <a href="https://t.me/futuretradeclub">TELEGRAM</a> </span></div>
                     </div>
                 </div>
             </div>

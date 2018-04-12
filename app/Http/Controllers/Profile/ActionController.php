@@ -6,6 +6,7 @@ use App\Models\Deposit;
 use App\Models\DepositAccrued;
 use App\Models\Payment;
 use App\Models\Plan;
+use App\Models\RefsReward;
 use App\Models\Wallet;
 use App\Notifications\DepositCreatorNotification;
 use App\User;
@@ -92,7 +93,10 @@ class ActionController extends Controller
     public function depositsRequest(Request $request)
     {
         $me = \Auth::user();
+
         if ($me->money >= $request->payment_amount) {
+            $me->is_active = true;
+            $me->save();
             $deposit = new Deposit();
             $plan = Plan::findOrFail($request->hidden_plan_id);
 
@@ -113,7 +117,14 @@ class ActionController extends Controller
                 $payment->amount = $request->payment_amount * .11;
                 $payment->status_id = 2;
 
+                $refRewards = new RefsReward();
+
+                $refRewards->from_id = $me->id;
+                $refRewards->to_id = $reffer->id;
+                $refRewards->amount = $request->payment_amount * .11;
+
                 $payment->save();
+                $refRewards->save();
                 $me->reffer->increment('money', $request->payment_amount * .11);
             }
 

@@ -27,7 +27,7 @@
                     <td>{{$user->skype}}</td>
                     <td>{{$user->telegram}}</td>
                     <td>
-                        <a href="{{action('Admin\PageController@editUser', $user->id)}}"><i class="fa fa-edit"></i></a>
+                        <a href="{{action('Admin\PageController@editUser', $user->id)}}" data-toggle="tooltip" data-placement="right" title="Редактировать"><i class="fa fa-edit"></i></a>
                     </td>
                 </tr>
             @endforeach
@@ -35,3 +35,9 @@
         </table>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
+@endpush

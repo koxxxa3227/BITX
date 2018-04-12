@@ -32,12 +32,12 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $users = User::with('userDepositStatusFalse')->get();
             foreach ($users as $user){
-                $dayliPayment = mailDailyPayment($user);
-                if($dayliPayment){
-                    $user->notify(new DepositDailyPaymentNotification($dayliPayment));
+                $dailyPayment = mailDailyPayment($user);
+                if($dailyPayment){
+                    $user->notify(new DepositDailyPaymentNotification($dailyPayment));
                 }
             }
-        })->dailyAt('00:01');
+        })->dailyAt('00:00');
 
         $schedule->call(function () {
             $users = User::with('refPaymentsLastDay.payFrom')->get();

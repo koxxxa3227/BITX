@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Deposit;
 use App\Models\Payment;
+use App\Models\Plan;
 use App\Models\WalletInstruction;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class PageController extends Controller
         return $view;
     }
 
+    /*Users*/
     public function users(){
         $view = view("admin.users.index");
         $view->me = \Auth::user();
@@ -32,6 +34,17 @@ class PageController extends Controller
         $view->payments = $user->payments()->orderBy('id', 'desc')->paginate(10);
         return $view;
     }
+
+    public function openDeposit($id){
+        $view = view("admin.users.openDeposit");
+        $view->me = \Auth::user();
+        $view->deposits = Deposit::whereUserId($id)->paginate(10);
+        $view->plans = Plan::all();
+        $view->user_id = $id;
+        return $view;
+    }
+
+    /*Users End*/
 
     public function payments(){
         $view = view("admin.payments");
