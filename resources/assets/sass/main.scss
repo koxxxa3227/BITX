@@ -3,7 +3,7 @@
 }
 
 .mt {
-  &-0{
+  &-0 {
     margin-top : 0;
   }
   &-1 {
@@ -22,8 +22,9 @@
     margin-top : 5rem;
   }
 }
+
 .mb {
-  &-0{
+  &-0 {
     margin-bottom : 0;
   }
   &-1 {
@@ -42,8 +43,9 @@
     margin-bottom : 5rem;
   }
 }
+
 .ml {
-  &-0{
+  &-0 {
     margin-left : 0;
   }
   &-1 {
@@ -62,8 +64,9 @@
     margin-left : 5rem;
   }
 }
+
 .mr {
-  &-0{
+  &-0 {
     margin-right : 0;
   }
   &-1 {
@@ -82,66 +85,68 @@
     margin-right : 5rem;
   }
 }
-.my{
-  &-0{
-    margin-top : 0;
+
+.my {
+  &-0 {
+    margin-top    : 0;
     margin-bottom : 0;
   }
-  &-1{
-    margin-top : 1rem;
+  &-1 {
+    margin-top    : 1rem;
     margin-bottom : 1rem;
   }
-  &-2{
-    margin-top : 2rem;
+  &-2 {
+    margin-top    : 2rem;
     margin-bottom : 2rem;
   }
-  &-3{
-    margin-top : 3rem;
+  &-3 {
+    margin-top    : 3rem;
     margin-bottom : 3rem;
   }
-  &-4{
-    margin-top : 4rem;
+  &-4 {
+    margin-top    : 4rem;
     margin-bottom : 4rem;
   }
-  &-5{
-    margin-top : 5rem;
+  &-5 {
+    margin-top    : 5rem;
     margin-bottom : 5rem;
   }
 }
-.mx{
-  &-0{
-    margin-left : 0;
+
+.mx {
+  &-0 {
+    margin-left  : 0;
     margin-right : 0;
   }
-  &-1{
-    margin-left : 1rem;
+  &-1 {
+    margin-left  : 1rem;
     margin-right : 1rem;
   }
-  &-2{
-    margin-left : 2rem;
+  &-2 {
+    margin-left  : 2rem;
     margin-right : 2rem;
   }
-  &-3{
-    margin-left : 3rem;
+  &-3 {
+    margin-left  : 3rem;
     margin-right : 3rem;
   }
-  &-4{
-    margin-left : 4rem;
+  &-4 {
+    margin-left  : 4rem;
     margin-right : 4rem;
   }
-  &-5{
-    margin-left : 5rem;
+  &-5 {
+    margin-left  : 5rem;
     margin-right : 5rem;
   }
 }
 
 /*Margin Styles / End*/
 
-.text-uppercase{
+.text-uppercase {
   text-transform : uppercase;
 }
 
-.text-capitalize{
+.text-capitalize {
   text-transform : capitalize;
 }
 
@@ -190,6 +195,7 @@
     font-size : 12px;
   }
 }
+
 .replenishment_frm,
 .wallets_data_form,
 .personal_data_form,
@@ -259,45 +265,60 @@
   font-size : 20px;
 }
 
-select.custom-select{
-  display: block;
-  width: 100%;
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: #555;
-  vertical-align: middle;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+select.custom-select {
+  display            : block;
+  width              : 100%;
+  height             : 34px;
+  padding            : 6px 12px;
+  font-size          : 14px;
+  line-height        : 1.428571429;
+  color              : #555;
+  vertical-align     : middle;
+  background-color   : #fff;
+  background-image   : none;
+  border             : 1px solid #ccc;
+  border-radius      : 4px;
+  -webkit-box-shadow : inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow         : inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition : border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition         : border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-.d-inline-block{
+.d-inline-block {
   display : inline-block;
 }
 
-.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus{
-  background: #004D99;
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background : #004D99;
 }
 
-.border-bottom{
+.border-bottom {
   border-bottom : 1px solid #ccc;
 }
 
-.text-weight-bold{
+.text-weight-bold {
   font-weight : 700;
 }
 
-hr{
-  border: none;
-  border-top: 2px solid #ccc;
-  margin : 15px 0;
+hr {
+  border     : none;
+  border-top : 2px solid #ccc;
+  margin     : 15px 0;
+}
+
+.cabinet-css {
+  $font-size : 15px;
+  font-size : $font-size;
+  button, input, select, p {
+    font-size : $font-size;
+  }
+  label,
+  small,
+  table tr td,
+  table tr th {
+    font-size : $font-size - 1px !important;
+  }
+
 }
 
 @media (max-width : 991px) {
@@ -315,8 +336,8 @@ hr{
     }
   }
 
-  .text-sm-center{
-    text-align: center;
+  .text-sm-center {
+    text-align : center;
   }
 }
 

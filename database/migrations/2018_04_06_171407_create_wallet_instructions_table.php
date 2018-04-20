@@ -15,6 +15,7 @@ class CreateWalletInstructionsTable extends Migration
     {
         Schema::create('wallet_instructions', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('type');
             $table->string("wallet");
             $table->text("content");
             $table->string('link')->nullable();

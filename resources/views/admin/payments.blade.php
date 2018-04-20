@@ -60,13 +60,14 @@
                         <td>{{$payment->payment_system}}</td>
                         <td>{{$payment->created_at->format("d.M.Y H:i")}}</td>
                         <td>
-                            <form action="{{action('Admin\ActionController@updatePaymentStatus', $payment->id)}}" method="post">
+                            <form action="{{action('Admin\ActionController@updatePaymentStatus', [$payment->id])}}" method="post">
                                 @csrf
                                 <select name="status_id" id="status" class="custom-select" onchange="this.form.submit();" {{$payment->status_id != 1 ? "disabled" : ""}}>
                                     <option value="1" {{$payment->status_id == 1 ? "selected" : ""}}>В обработке</option>
                                     <option value="2" {{$payment->status_id == 2 ? "selected" : ""}}>Обработан</option>
                                     <option value="3" {{$payment->status_id == 3 ? "selected" : ""}}>Отменен</option>
                                 </select>
+                                <input type="text" name="type" hidden value="{{$payment->type == "Пополнение" ?: 0}}">
                             </form>
                         </td>
                     </tr>

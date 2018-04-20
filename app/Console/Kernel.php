@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
                     $user->notify(new DepositDailyPaymentNotification($dailyPayment));
                 }
             }
-        })->dailyAt('00:00');
+        })->dailyAt('00:01');
 
         $schedule->call(function () {
             $users = User::with('refPaymentsLastDay.payFrom')->get();

@@ -25,7 +25,7 @@
         </div>
         <div class="col-md-3 col-sm-6 mt-sm-2">
             <div class="rounded text-center border menu-info-item m-auto">
-                <small class="text-secondary">Общий реферальный доход:</small>
+                <small class="text-secondary">Партнерский доход:</small>
                 <p><strong>{{allRefsSum()}} <i class="fa fa-usd"></i></strong></p>
                 <p class="check-circle"><i class="fa fa-check"></i></p>
             </div>

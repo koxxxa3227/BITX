@@ -40,6 +40,8 @@
     <script type="text/javascript" src="/js/classie.js"></script>
     <script type="text/javascript" src="/js/jquery.cookie.js"></script>
 
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=5m2vzl2xoliahb7pqv9yzdbt0qtrgz2hstunp3asmaaug4wd"></script>
+
     <script type="text/javascript">
         $(document).ready(function (e) {
             $('.res-nav_click').click(function () {

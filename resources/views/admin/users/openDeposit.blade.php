@@ -2,6 +2,7 @@
 
 @section("content")
     <div class="container my-2">
+        @include('components.admin_user_menu')
         <h2 class="text-center">Открыть новый депозит:</h2>
         @foreach($plans as $plan)
             <form action="{{action('Admin\ActionController@createNewDeposit', $user_id)}}" method="post" class="deposit_form deposit_form_{{$plan->id}} {{$plan->id != 1 ? "d-none" : ""}}">
@@ -42,13 +43,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="plan_{{$plan->id}}_date">Дата открытия:</label>
-                            <input type="date" name="open_date" id="plan_{{$plan->id}}_date" class="form-control">
+                            <input type="date" name="open_date" id="plan_{{$plan->id}}_date" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="open_time">Время открытия</label>
-                            <input type="time" id="open_time" name="open_time" class="form-control">
+                            <input type="time" id="open_time" name="open_time" class="form-control" required>
                         </div>
                     </div>
                 </div>

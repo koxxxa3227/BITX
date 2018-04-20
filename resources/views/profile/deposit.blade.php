@@ -17,7 +17,7 @@
 @endpush
 
 @section("content")
-    <div class="container my-2">
+    <div class="container my-2 cabinet-css">
         <div class="row">
             @include('components.cabinet.menu', ['value' => '1'])
         </div>
@@ -87,17 +87,21 @@
                             </div>
                             <div class="col-md-5">
                                 @if($endDate = endDate($myDeposit->created_at, $myDeposit->plan->days_multiply))
-                                    @if(\Carbon\Carbon::parse($endDate) <= \Carbon\Carbon::now())
+                                    @if($myDeposit->status == "Обработан")
                                         <span class="text-success">Завершен</span>.
-                                        {{$endDate}}
+                                        {{$endDate->format("d.m.Y H:i")}}
                                         начислено {{money($myDeposit->payment_amount + $myDeposit->income_with_percent)}}
                                         $
-                                    @elseif($myDeposit->plan->id == 4)
-                                        Бессрочно. Выплата раз в 14 дней. Через дней, вам будет начислено {{businessProLeftDay($myDeposit)}}
                                     @else
-                                        {{$endDate}} будет
-                                        начислено {{money($myDeposit->income_with_percent + $myDeposit->payment_amount)}}
-                                        <i class="fa fa-usd"></i>
+                                        @if($myDeposit->plan->id != 4)
+                                            {{$endDate->format("d.m.Y H:i")}} будет
+                                            начислено {{money($myDeposit->income_with_percent + $myDeposit->payment_amount)}}
+                                            <i class="fa fa-usd"></i>
+                                        @else
+                                            Бессрочно. Выплата раз в 14 дней. Через {{businessProLeftDay($myDeposit)}}
+                                            дней, вам будет начислено
+                                            {{$myDeposit->payment_amount*$myDeposit->plan->percent / 100 * businessProLeftDay($myDeposit)}}
+                                        @endif
                                     @endif
                                 @endif
                                 <br>

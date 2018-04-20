@@ -34,7 +34,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
     Route::get('/deposits', 'Admin\PageController@deposits');
     Route::get('/wallet-instruction', 'Admin\PageController@walletInstruction');
     Route::get('/user/id={id}/open-deposit/', 'Admin\PageController@openDeposit');
+    Route::get('/user/id={id}/payment-create/', 'Admin\PageController@retrofittingPage');
+    Route::get('/user/id={id}/payment-retroactively-creator/', 'Admin\PageController@retroActivelyPage');
     Route::get('/user/id{user_id}/deposit/id={id}/delete', 'Admin\ActionController@removeDeposit');
+    Route::get('/user/id={id}/ref', "Admin\PageController@refsPage");
+    Route::get('/user/id={user_id}/ref/id={id}/remove', "Admin\ActionController@removeRef");
+    Route::get('/user/id={user_id}/ref/truncate', "Admin\ActionController@truncateRefs");
+    Route::get('/payments/id={id}/delete', 'Admin\ActionController@removePayment');
 
     Route::group(['prefix' => 'post'], function(){
         Route::post('/user/id={id}/save', 'Admin\ActionController@editUserSaver');
@@ -43,13 +49,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','isAdmin']], function
         Route::post('/wallet-instruction/save', 'Admin\ActionController@walletInstructionSaver');
         Route::post('/add-bonus/{id}', 'Admin\ActionController@addBonus');
         Route::post('/deposit-creator/{id}', 'Admin\ActionController@createNewDeposit');
+        Route::post('/payment-creator/{id}', 'Admin\ActionController@retrofitting');
     });
 });
 
-Route::group(['prefix' => 'profile', 'middleware' => ['auth', 'depositAccrued']], function(){
+Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function(){
     Route::get('/', function(){ return redirect()->action('Profile\PageController@cabinet'); });
     Route::get('/deposit/{deposit?}', 'Profile\PageController@deposit');
-    Route::get('/balance/{popup?}', 'Profile\PageController@payments');
+    Route::get('/balance/{type?}/{popup?}', 'Profile\PageController@payments');
     Route::get('/cabinet', 'Profile\PageController@cabinet');
     Route::get('/refs', 'Profile\PageController@refs');
 
@@ -62,15 +69,9 @@ Route::group(['prefix' => 'profile', 'middleware' => ['auth', 'depositAccrued']]
     });
 });
 
-Route::group(['prefix' => 'advcash','middleware' => 'auth'],function(){
-	Route::get('pay/{id}','AdvCashController@pay');
+Route::group(['prefix' => 'advcash'],function(){
+	Route::get('pay/{id}','AdvCashController@pay')->middleware('auth');
 	Route::get('status','AdvCashController@status');
 	Route::get('success','AdvCashController@success');
 	Route::get('fail','AdvCashController@fail');
-});
-
-Route::get('/mail-test',function(){
-    $user = \App\User::find(16);
-    $user->load('refPaymentsLastDay.payFrom');
-	$user->notify(new \App\Notifications\RefNotification($user->refPaymentsLastDay));
 });

@@ -24,6 +24,7 @@ class ActionController extends Controller
 
             if (!empty($request->email)) $me->email = $request->email;
             if (!empty($request->login)) {
+                User::whereRefLogin($me->lower_login)->update(['ref_login' => strtolower($request->login)]);
                 $me->login = $request->login;
                 $me->lower_login = strtolower($request->login);
             }
@@ -87,7 +88,7 @@ class ActionController extends Controller
             \Session::flash('status', 'Недостаточно денег');
         }
 
-        return redirect()->action('Profile\PageController@payments', $payment_system);
+        return redirect()->action('Profile\PageController@payments', [2, $payment_system]);
     }
 
     public function depositsRequest(Request $request)
@@ -104,7 +105,7 @@ class ActionController extends Controller
             $deposit->plan_id = $request->hidden_plan_id;
             $deposit->payment_amount = $request->payment_amount;
             $result = $request->payment_amount * $plan->percent / 100 * $plan->days_multiply;
-            $deposit->income_with_percent = number_format($result, 2, '.', ' ');
+            $deposit->income_with_percent = $result;
 
                 $deposit->save();
 
@@ -113,6 +114,8 @@ class ActionController extends Controller
                 $payment = new Payment();
 
                 $payment->user_id = $reffer->id;
+                $payment->from_id = $me->id;
+                $payment->deposit_id = $deposit->id;
                 $payment->type = "Реферальное вознаграждение";
                 $payment->amount = $request->payment_amount * .11;
                 $payment->status_id = 2;
@@ -167,6 +170,9 @@ class ActionController extends Controller
         $view->payments = $me->payments()->orderBy('id', 'desc')->paginate(10);
         $view->popup = $payment_system;
 
-        return redirect()->action('Profile\PageController@payments', $payment_system);
+
+	    return redirect()->action('AdvCashController@pay', $payments->id);
+	    //return redirect()->action('Profile\PageController@payments', [1, $payment_system]);
+
     }
 }

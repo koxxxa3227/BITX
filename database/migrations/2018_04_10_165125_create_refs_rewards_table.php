@@ -17,6 +17,8 @@ class CreateRefsRewardsTable extends Migration
             $table->increments('id');
             $table->integer("from_id");
             $table->integer("to_id");
+            $table->integer("deposit_id");
+            $table->integer("payment_id");
             $table->text('amount');
             $table->timestamps();
         });

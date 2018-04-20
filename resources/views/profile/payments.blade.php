@@ -11,14 +11,14 @@
 
         @media (min-width : 769px) {
             .col-20p {
-                width : calc(100% / 5 - 30px);
+                width : calc(100% / 4 - 30px);
             }
         }
     </style>
 @endpush
 
 @section("content")
-    <div class="container my-2">
+    <div class="container my-2 cabinet-css">
         <div class="row">
             @include('components.cabinet.menu', ['value'=> '2'])
         </div>
@@ -31,6 +31,13 @@
                     <div class="row text-center">
                         <div class="d-block d-xs-none" id="desktop_replenishment_system">
                             <h4 class="text-center">Выберите систему пополнения:</h4>
+                            <div class="col-20p">
+                                <div class="img-block">
+                                    <img src="/img/ADVCASH.png" alt="" id="adv_img"
+                                         class="img-responsive thumbnail m-auto">
+                                </div>
+                                <input type="radio" name="payment_system" id="adv_radio" value="adv" title="ADVCash" required>
+                            </div>
                             <div class="col-20p">
                                 <div class="img-block">
                                     <img src="/img/logo-payeer.png" alt="" id="payeer_img"
@@ -47,23 +54,10 @@
                             </div>
                             <div class="col-20p">
                                 <div class="img-block">
-                                    <img src="/img/ADVCASH.png" alt="" id="adv_img"
-                                         class="img-responsive thumbnail m-auto">
-                                </div>
-                                <input type="radio" name="payment_system" id="adv_radio" value="adv" title="ADVCash" required>
-                            </div>
-                            <div class="col-20p">
-                                <div class="img-block">
                                     <img src="/img/bitcoin.png" alt="" id="btc_img"
                                          class="img-responsive thumbnail m-auto">
                                 </div>
                                 <input type="radio" name="payment_system" id="btc_radio" value="btc" title="Bitcoin" required>
-                            </div>
-                            <div class="col-20p">
-                                <div class="img-block">
-                                    <img src="/img/ETH.png" alt="" id="eth_img" class="img-responsive thumbnail m-auto">
-                                </div>
-                                <input type="radio" name="payment_system" id="eth_radio" value="eth" title="Ethereum" required>
                             </div>
                         </div>
                     </div>
@@ -97,14 +91,13 @@
                                 <option value="pm">Perfect Money</option>
                                 <option value="adv">Advcash</option>
                                 <option value="btc">BTC</option>
-                                <option value="eth">ETH</option>
                             </select>
                             <button class="btn btn-primary btn-block my-2">Пополнить</button>
                         </div>
                     </div>
                 </form>
                 @if(isset($popup) && !empty($popup))
-                    @if($wallet_info = getTheContent($popup))
+                    @if($wallet_info = getTheContent($type, $popup))
                         <div class="modal fade in show" id="myModal" tabindex="-1" role="dialog"
                              aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
@@ -116,15 +109,36 @@
                                         {!! $wallet_info->content !!}
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success" data-dismiss="modal"
+                                        <a href="/profile/balance" class="btn btn-success" data-dismiss="modal"
                                                 id="close-modal">
                                             Ок
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endif
+                @endif
+                @if (session('message'))
+                    <div class="modal fade in show" id="myModal" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">Состояние платежа</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {{ session('message') }}
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="/profile/balance" class="btn btn-success" data-dismiss="modal"
+                                       id="close-modal">
+                                        Ок
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
             <div class="col-md-6 text-center">
@@ -136,6 +150,13 @@
                         <div class="d-block d-xs-none" id="desktop_payment_system">
                             <div class="form-group">
                                 <p>Что бы вывести средства, укажите сумму и выберите электронный кошелёк</p>
+                            </div>
+                            <div class="col-20p">
+                                <div class="img-block">
+                                    <img src="/img/ADVCASH.png" alt="" id="adv_img"
+                                         class="img-responsive thumbnail m-auto">
+                                </div>
+                                <input type="radio" name="payment_system" id="adv_radio" value="adv" title="ADVCash" required>
                             </div>
                             <div class="col-20p">
                                 <div class="img-block">
@@ -153,23 +174,10 @@
                             </div>
                             <div class="col-20p">
                                 <div class="img-block">
-                                    <img src="/img/ADVCASH.png" alt="" id="adv_img"
-                                         class="img-responsive thumbnail m-auto">
-                                </div>
-                                <input type="radio" name="payment_system" id="adv_radio" value="adv" title="ADVCash" required>
-                            </div>
-                            <div class="col-20p">
-                                <div class="img-block">
                                     <img src="/img/bitcoin.png" alt="" id="btc_img"
                                          class="img-responsive thumbnail m-auto">
                                 </div>
                                 <input type="radio" name="payment_system" id="btc_radio" value="btc" title="Bitcoin" required>
-                            </div>
-                            <div class="col-20p">
-                                <div class="img-block">
-                                    <img src="/img/ETH.png" alt="" id="eth_img" class="img-responsive thumbnail m-auto">
-                                </div>
-                                <input type="radio" name="payment_system" id="eth_radio" value="eth" title="Ethereum" required>
                             </div>
                         </div>
                     </div>
@@ -203,7 +211,6 @@
                                 <option value="pm">Perfect Money</option>
                                 <option value="adv">Advcash</option>
                                 <option value="btc">BTC</option>
-                                <option value="eth">ETH</option>
                             </select>
                             <button class="btn btn-primary btn-block mt-2">Вывести</button>
                         </div>
@@ -236,7 +243,7 @@
                                         @lang("Payment Status $payment->status_id")
                                     </td>
                                     <td>
-                                        @if($payment->status_id == 1 && $payment->payment_system == 'adv')
+                                        @if($payment->status_id == 1 && $payment->type == 'Пополнение')
                                             <a class="btn btn-sm btn-success" href="{{ action('AdvCashController@pay',$payment->id) }}">Оплатить</a>
                                         @endif
                                     </td>
@@ -256,13 +263,6 @@
 
 @push('script')
     <script>
-        @if(isset($popup) && !empty($popup))
-        $('#close-modal').on('click', function () {
-            // $('#myModal').removeClass('show');
-
-            window.location.replace('/profile/balance');
-        });
-        @endif
 
         $('#withdraw_amount').on('input', function () {
             var left = '{{$me->money}}' - $(this).val();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Deposit;
 use App\Models\Payment;
 use App\Models\Plan;
+use App\Models\RefsReward;
 use App\Models\WalletInstruction;
 use App\User;
 use Illuminate\Http\Request;
@@ -44,6 +45,32 @@ class PageController extends Controller
         return $view;
     }
 
+    public function retrofittingPage($id){
+        $view = view("admin.users.retrofittingPage");
+        $view->user_id = $id;
+        $view->user_login = User::findOrFail($id)->login;
+        $view->payments = Payment::whereUserId($id)
+            ->whereType('Пополнение')->orderBy('created_at', 'desc')->paginate(10);
+        return $view;
+    }
+
+    public function retroActivelyPage($id){
+        $view = view("admin.users.paymentRetroactivelyPage");
+        $view->user_id = $id;
+        $view->user_login = User::findOrFail($id)->login;
+        $view->payments = Payment::whereUserId($id)
+            ->whereType('Вывод')->orderBy('created_at', 'desc')->paginate(10);
+        return $view;
+    }
+
+    public function refsPage($id){
+        $view = view("admin.users.refPage");
+        $view->me = \Auth::user();
+        $view->refs = RefsReward::whereToId($id)->paginate(10);
+        $view->user_id = $id;
+        return $view;
+    }
+
     /*Users End*/
 
     public function payments(){
@@ -55,14 +82,16 @@ class PageController extends Controller
 
     public function deposits(){
         $view = view("admin.deposits");
-        $view->deposits = Deposit::query()->paginate(20);
+        $view->deposits = Deposit::query()->orderBy('id', 'desc')->paginate(20);
         return $view;
     }
 
     public function walletInstruction(){
         $view = view("admin.walletInstruction");
         $view->me = \Auth::user();
-        $view->instructions = WalletInstruction::all();
+        $view->paymentInstructions = WalletInstruction::whereType(1)->get();
+        $view->replenishmentInstructions = WalletInstruction::whereType(2)->get();
+
         return $view;
     }
 }

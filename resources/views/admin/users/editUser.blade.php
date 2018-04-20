@@ -25,6 +25,7 @@
 
 @section("content")
     <div class="container my-2">
+        @include('components.admin_user_menu', ['user_id' => $user->id])
         <form action="{{action('Admin\ActionController@editUserSaver', $user->id)}}" method="post">
             @csrf
             <div class="row">
@@ -44,6 +45,10 @@
                             <option {{$user->role == "user" ? "selected" : ""}} value="user">@lang('user')</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="register_date">Дата регистрации</label>
+                        <input type="date" id="register_date" name="register_date" class="form-control">
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -58,6 +63,10 @@
                         <label for="telegram">Telegram</label>
                         <input type="text" class="form-control" id="telegram" name="telegram"
                                value="{{$user->telegram}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="register_time">Время регистрации</label>
+                        <input type="time" id="register_time" name="register_time" class="form-control">
                     </div>
                 </div>
             </div>

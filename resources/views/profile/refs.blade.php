@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("content")
-    <div class="container my-2" id="refs-page">
+    <div class="container my-2 cabinet-css" id="refs-page">
         <div class="row">
             @include('components.cabinet.menu', ['value' => '4'])
         </div>
@@ -22,7 +22,7 @@
                     <div class="col-sm-6">
                         <div class="rounded text-center border menu-info-item m-auto">
                             <small class="text-secondary">Всего <br> регистраций:</small>
-                            <p class="fz-20 counter-style"><strong>{{$myRefsCount}}</strong></p>
+                            <p class="fz-20 counter-style"><strong>{{AllRegisteredRefs()}}</strong></p>
                             <p class="check-circle"><i class="fa fa-check"></i></p>
                         </div>
                     </div>
